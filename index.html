@@ -10,13 +10,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Calm Neutrals (Reverted to original Blue & Slate) -->
-    <!-- Application Structure Plan: A tab-based single-page application. The top navigation consists of buttons for each of the five courses. Clicking a tab reveals a dedicated section for that course, which includes its aim, evaluation donut chart, weekly schedule, and recommended readings. A footer with a link to the creator's website is now present at the bottom of the page. This structure was chosen to provide a clean, focused view of one subject at a time, preventing information overload. It allows the user to easily switch between content sections without scrolling or page reloads, making comparison and planning intuitive and efficient for a student's workflow, and providing external link for creator information. -->
+    <!-- Application Structure Plan: A tab-based single-page application. The top navigation consists of buttons for each of the five courses. Clicking a tab reveals a dedicated section for that course, which includes its aim, evaluation donut chart, weekly schedule, recommended readings, and a new "Access Recommended Readings Drive Files" section with Google Drive links. A footer with a link to the creator's website is present. This structure was chosen to provide a clean, focused view of one subject at a time, preventing information overload, and integrating all relevant content. -->
     <!-- Visualization & Content Choices: 
         1. Course Navigation: Goal: Organize. Method: HTML buttons styled with Tailwind. Interaction: onClick to switch visible content. Justification: Standard, intuitive navigation pattern for SPAs.
         2. Evaluation Breakdown: Goal: Compare/Inform. Method: Donut Chart. Interaction: Hover for tooltips. Justification: Provides a quick, visual summary of assessment weights, which is more engaging than a text list. Library: Chart.js (Canvas).
         3. Weekly Schedule: Goal: Inform/Organize. Method: Structured HTML list. Interaction: Vertical scrolling with visible scrollbar. Justification: A clear, chronological list is the most effective way to present the weekly topics, ensuring scrollability is obvious.
         4. Recommended Readings: Goal: Inform. Method: Structured HTML list with clickable links. Interaction: Clicking opens a Google search for the book. Justification: Provides quick access to more information about the readings.
-        All textual content (aims, topics, readings) is presented in clean, readable blocks to support the primary goal of information consumption. -->
+        5. Module Files: Goal: Access. Method: Structured HTML list with Google Drive links. Interaction: Clicking opens the link in a new tab. Justification: Provides direct access to supplementary module-specific resources.
+        All textual content (aims, topics, readings, module files) is presented in clean, readable blocks to support the primary goal of information consumption. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
@@ -105,6 +106,9 @@
                 ],
                 readings: [
                     "Armstrong, M. & Taylor, S., (2017), Armstrong's Handbook of Human Resource Management Practice, Kogan Page, London."
+                ],
+                files: [
+                    { name: "HR Module Files", url: "https://drive.google.com/file/d/1egsTxCkBz70cLx5X54uyTgrqVPJT9YGX/view?usp=drive_link" }
                 ]
             },
             op: {
@@ -141,6 +145,11 @@
                     "Russel. R.S and Taylor B.W., (2003) Operations Management, Pearson Education",
                     "William J. S., (2021) Operations Management, McGraw Hill/Irwin Series (14th Edition)",
                     "In addition, jounal articles/book chapters will be provided/uploaded before the lectures"
+                ],
+                files: [
+                    { name: "Operations Module File 1", url: "https://drive.google.com/file/d/10eQCNnIKYJx6_euEfOKi9BzJcU51U2Uz/view?usp=drive_link" },
+                    { name: "Operations Module File 2", url: "https://drive.google.com/file/d/15xurqKCGm7G75KdOqU-jfpGUMnyyNJ0C/view?usp=drive_link" },
+                    { name: "Operations Module File 3", url: "https://drive.google.com/file/d/1JYlLcA4uhvE6b86RIPgmJRQ2Wmrlb1UY/view?usp=sharing" }
                 ]
             },
             research: {
@@ -173,6 +182,10 @@
                 readings: [
                     "Saunders, M.N.K., Lewis, P. and Thornhill, A. (2020) Research Methods for Business Students, Nils Eid, Pearson Education, India",
                     "Sekaran, U., & Bougic, R (2016) Research methods for business. A skill-building approach (7th ed), John Wiley & Sons Ltd., West Sussex,"
+                ],
+                files: [
+                    { name: "Research Project File 1", url: "https://drive.google.com/file/d/1zBQHbB_d_LXrtukzi2vkey42lNVzMTEe/view?usp=drive_link" },
+                    { name: "Research Project File 2", url: "https://drive.google.com/file/d/1qQ3AfjULLJCMcX64vH6_oA-qe3hCoWjh/view?usp=drive_link" }
                 ]
             },
             ob: {
@@ -208,6 +221,11 @@
                     "Kreitner, R. & Kinicki, A., (2012), Organizational Behavior, 10 th ed., McGraw-Hill, New York",
                     "McShane, S. &Von Glinow, M., (2017), Organizational Behaviour, 8 th ed., McGraw-Hill, New York.",
                     "Opatha, H.D.N.P. (2015), Organizational Behaviour. The Human Side of Work, Colombo."
+                ],
+                files: [
+                    { name: "OB Module File 1", url: "https://drive.google.com/file/d/1K4GJZsWpb9ZTCnOHXK7Katrmwy95JBE4/view?usp=drive_link" },
+                    { name: "OB Module File 2", url: "https://drive.google.com/file/d/16PJMP5FoBwZQt51qx-7Cf9yxgEosk3jD/view?usp=drive_link" },
+                    { name: "OB Module File 3", url: "https://drive.google.com/file/d/1a_d5i2YR8QfpMxGiIBVOsUN2Y_ZjLKBU/view?usp=drive_link" }
                 ]
             },
             marketing: {
@@ -243,6 +261,10 @@
                     "Grewal, D. and Levy, M. (2016) Marketing, 5 Edition, McGraw Hill Education.",
                     "Kotler. P. and Armstrong, G. (2016) Principles of Marketing, 16 edition. Peatson.",
                     "Cravens, D.W. and Piercy, N.F. (2009) Strategic Marketing, 8 th edition, Tata McGraw Hill Education Private Limited."
+                ],
+                files: [
+                    { name: "Marketing Module File 1", url: "https://drive.google.com/file/d/1egsTxCkBz70cLx5X54uyTgrqVPJT9YGX/view?usp=drive_link" },
+                    { name: "Marketing Module File 2", url: "https://drive.google.com/file/d/1X-N4aLSQ8Xx1FJB3eMesW-nSQutKDOS7/view?usp=drive_link" }
                 ]
             }
         };
@@ -279,9 +301,9 @@
                                 <canvas id="chart-${course.id}"></canvas>
                             </div>
                         </div>
-                        <div class="lg:col-span-1">
+                        <div class="lg:col-span-1 flex flex-col">
                             <h3 class="text-lg font-semibold text-slate-700 mb-4">Weekly Lecture Schedule <br> (1-15 Weeks)</h3>
-                            <div class="max-h-[300px] overflow-y-auto pr-2 space-y-3 mb-6 custom-scrollbar">
+                            <div class="max-h-[250px] overflow-y-auto pr-2 space-y-3 mb-6 custom-scrollbar flex-grow">
                                 ${course.topics.map((topic, index) => `
                                     <div class="flex items-start p-3 rounded-lg ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} border border-slate-200">
                                         <div class="flex-shrink-0 bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4">${index + 1}</div>
@@ -289,14 +311,25 @@
                                     </div>
                                 `).join('')}
                             </div>
-                            <h3 class="text-lg font-semibold text-slate-700 mb-4">Recommended Readings</h3>
-                            <div class="max-h-[200px] overflow-y-auto pr-2 space-y-2 custom-scrollbar">
+                            
+                            <h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">Recommended Readings</h3>
+                            <div class="max-h-[150px] overflow-y-auto pr-2 space-y-2 custom-scrollbar flex-grow">
                                 ${course.readings && course.readings.length > 0 ? 
                                     course.readings.map((reading, index) => `
                                         <p class="text-slate-600 ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} p-2 rounded-lg border border-slate-200">
                                             <a href="https://www.google.com/search?q=${encodeURIComponent(reading)}" target="_blank" class="text-blue-600 hover:underline">${reading}</a>
                                         </p>
                                     `).join('') : '<p class="text-slate-600 p-2">N/A</p>'}
+                            </div>
+
+                            <h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">Access Recommended Readings Drive Files</h3>
+                            <div class="max-h-[150px] overflow-y-auto pr-2 space-y-2 custom-scrollbar flex-grow">
+                                ${course.files && course.files.length > 0 ? 
+                                    course.files.map((file, index) => `
+                                        <p class="text-slate-600 ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} p-2 rounded-lg border border-slate-200">
+                                            <a href="${file.url}" target="_blank" class="text-blue-600 hover:underline">📁 ${file.name}</a>
+                                        </p>
+                                    `).join('') : '<p class="text-slate-600 p-2">No module files available.</p>'}
                             </div>
                         </div>
                     </div>
