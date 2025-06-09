@@ -9,17 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Calm Neutrals (Reverted to original Blue & Slate) -->
-    <!-- Application Structure Plan: A two-page (welcome and dashboard) single-page application. The initial view is a welcome page with a large "MBA" title and interactive semester tiles. Clicking the active Semester 2 tile reveals the detailed MBA Semester II Dashboard, which includes course navigation tabs, evaluation donut charts, a scrollable weekly schedule, recommended readings, and Google Drive file links. A footer with a creator's link is present on all views. This modular design enhances user navigation and content organization. -->
-    <!-- Visualization & Content Choices: 
-        1. Welcome Page: Goal: Initial greeting and navigation. Method: Large text for emphasis with shadow, interactive tiles for semester selection with enhanced colors, original rectangular shape restored for better responsiveness, rounded edges, and drop shadow for better UI/UX. "Coming Soon!" text is made more visible and centered. Semester numbers are vertically and horizontally aligned, and descriptive text appears on a new line. An arrow icon is added to the active Semester 2 tile. The "Dashboards by Sahansa Jayawardhana" text is added below the main title. Background gradient added for modern look. A callout box is added for the "Select a Semester..." instruction. Inactive semester tiles are now using the *previous*, less faded colors to highlight Semester 2. Animated cartoon learning characters/managers are added to the welcome screen as subtle background vector illustrations. Justification: Provides a clear starting point and previews available content visually and attractively.
-        2. Course Navigation: Goal: Organize. Method: HTML buttons styled with Tailwind. Interaction: onClick to switch visible content. A back button with only an arrow is added to the dashboard header for easy navigation. Justification: Standard, intuitive navigation pattern for SPAs.
-        3. Evaluation Breakdown: Goal: Compare/Inform. Method: Donut Chart. Interaction: Hover for tooltips. Justification: Provides a quick, visual summary of assessment weights, which is more engaging than a text list. Library: Chart.js (Canvas).
-        4. Weekly Schedule: Goal: Inform/Organize. Method: Structured HTML list. Interaction: Vertical scrolling with visible scrollbar. A "Jump to Week 15" button is included for quick access. Justification: A clear, chronological list is effective, ensuring scrollability is obvious and key topics are reachable.
-        5. Recommended Readings: Goal: Inform. Method: Structured HTML list with clickable links. Interaction: Clicking opens a Google search for the book. Justification: Provides quick access to more information about the readings.
-        6. Module Files: Goal: Access. Method: Structured HTML list with Google Drive links. Interaction: Clicking opens the link in a new tab. A new section "Add Your Findings Here" is included with a link to a shared Drive folder for viewer contributions. Justification: Provides direct access to supplementary module-specific resources and a mechanism for user contribution.
-        All textual content is presented in clean, readable blocks to support the primary goal of information consumption. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -137,35 +126,29 @@
         }
         /* Back button styling */
         .back-button {
-            position: absolute;
-            left: 1rem; /* Adjust as needed */
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 0; /* Removed padding */
-            background-color: transparent; /* Made transparent */
+            /* Removed absolute positioning */
+            background-color: transparent;
             color: #475569; /* slate-700 */
-            border-radius: 0.5rem;
+            border-radius: 0.5rem; /* Still relevant for hover effect */
             font-weight: 600;
-            transition: background-color 0.2s, transform 0.2s;
+            transition: background-color 0.2s, transform 0.2s, color 0.2s; /* Added color transition */
             box-shadow: none; /* Removed box shadow */
-            line-height: 1; /* Ensure arrow is vertically centered */
-            font-size: 1.5rem; /* Larger arrow for visibility */
+            font-size: 1.25rem; /* Slightly smaller for text, or keep 1.5rem for arrow dominant */
+            padding: 0.25rem 0.75rem; /* Add some padding back for hover area */
+            display: inline-flex; /* To align arrow and text */
+            gap: 0.5rem; /* Space between arrow and text */
+            align-items: center;
         }
         .back-button:hover {
-            background-color: #CBD5E1; /* slate-300 on hover (can be adjusted) */
-            transform: translateY(-50%) scale(1.05);
+            background-color: #E2E8F0; /* Light background on hover */
+            color: #1e293b; /* slate-900 */
+            transform: scale(1.02); /* Subtle scale effect */
         }
         /* Responsive adjustments for the back button */
         @media (max-width: 640px) { /* Small screens */
             .back-button {
-                left: 0.5rem;
-                padding: 0; /* Removed padding */
-                font-size: 1.25rem;
-            }
-            /* Adjusted padding for header text to avoid overlap on small screens */
-            .sticky-header-content .text-center {
-                padding-left: 3rem; 
-                padding-right: 3rem;
+                padding: 0.2rem 0.6rem;
+                font-size: 1.1rem;
             }
         }
 
@@ -182,12 +165,10 @@
 </head>
 <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
 
-    <!-- Welcome Page Section -->
     <div id="welcome-page" class="container mx-auto p-4 sm:p-6 md:p-8 flex-grow flex flex-col items-center justify-center text-center bg-gradient-to-br from-slate-50 to-blue-50 relative overflow-hidden">
         <h1 class="text-6xl md:text-8xl font-extrabold text-slate-900 mb-2 tracking-tighter h1-text-shadow">MBA</h1>
         <p class="text-lg text-slate-600 mb-8">Dashboards by Sahansa Jayawardhana</p>
         
-        <!-- Callout for "Select a Semester to begin your learning journey." -->
         <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-8 rounded-lg shadow-md max-w-xl w-full">
             <p class="text-lg font-semibold">Select a Semester to begin your learning journey.</p>
         </div>
@@ -211,8 +192,6 @@
             </div>
         </div>
 
-        <!-- Animated Background Vector Illustrations -->
-        <!-- Abstract Learning Icon (Book) -->
         <div class="absolute top-1/4 left-[10%] transform -translate-x-1/2 -translate-y-1/2 animate-float hidden md:block opacity-10" style="animation-duration: 4s;">
             <svg class="w-28 h-28 text-blue-300" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M21 4H7C5.9 4 5 4.9 5 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7 20V6h14l.01 14H7z"/>
@@ -220,7 +199,6 @@
             </svg>
         </div>
 
-        <!-- Abstract Management Icon (Bar Chart) -->
         <div class="absolute bottom-1/4 right-[10%] transform translate-x-1/2 translate-y-1/2 animate-float hidden md:block opacity-10" style="animation-delay: 0.5s; animation-duration: 3.5s;">
             <svg class="w-28 h-28 text-purple-300" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 22H2V2h2v20zM22 10h-2V6h2v4zM18 14h-2V2h2v12zM14 18h-2V6h2v12zM10 22h-2V2h2v20z"/>
@@ -229,28 +207,24 @@
 
     </div>
 
-    <!-- MBA Semester II Dashboard Section -->
     <div id="dashboard-page" class="container mx-auto p-4 sm:p-6 md:p-8 flex-grow hidden">
         <header class="text-center mb-8 relative">
-            <!-- Sticky container for the title and back button -->
             <div class="sticky top-0 z-10 bg-slate-50 py-6 shadow-sm relative">
-                <button onclick="showWelcomePage()" class="back-button">
-                    &#8592;
-                </button>
-                <h1 class="text-3xl md:text-4xl font-bold text-slate-900">MBA Semester II Dashboard by Sahansa Jayawardhana</h1>
+                <div class="flex flex-col items-center"> <button onclick="goToWelcomeFromDashboard()" class="back-button mb-2">
+                        &#8592; Back
+                    </button>
+                    <h1 class="text-3xl md:text-4xl font-bold text-slate-900">MBA Semester II Dashboard by Sahansa Jayawardhana</h1>
+                </div>
             </div>
-            <!-- Elements below will scroll with the content -->
             <p class="mt-2 text-lg text-slate-600">I just created this for fun & educational purpose. <br> Happy Learning, Everyone :)</p>
             <p id="current-datetime" class="text-sm text-slate-500 mt-2"></p>
         </header>
 
         <nav id="course-tabs" class="flex flex-wrap justify-center gap-2 mb-8">
-            <!-- Tabs will be generated by JS -->
-        </nav>
+            </nav>
 
         <main id="course-content">
-            <!-- Course content sections will be generated by JS -->
-        </main>
+            </main>
     </div>
 
     <footer class="mt-auto py-4 text-center text-slate-600 text-sm bg-slate-100">
@@ -512,7 +486,6 @@
                                     `).join('') : '<p class="text-slate-600 p-2">No module files available.</p>'}
                             </div>
 
-                            <!-- New section for "Add Your Findings Here" -->
                             <h3 class="text-lg font-semibold text-slate-700 mb-2 mt-6">Add Your Findings Here</h3>
                             <p class="text-sm text-slate-600 mb-4">Click and visit the drive folder and you can upload your resources.</p>
                             <a href="https://drive.google.com/drive/folders/19Ba2q4EyBIgOYnxLlOy_iSpr6l8bWMD9?usp=drive_link" target="_blank" class="inline-block px-4 py-2 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition-colors duration-200 shadow-md self-start">
@@ -587,7 +560,48 @@
             });
         }
 
-        function showCourse(courseId) {
+        // Function to update the UI based on state
+        function renderPage(state) {
+            if (!state || state.page === 'welcome') {
+                document.getElementById('welcome-page').classList.remove('hidden');
+                document.getElementById('dashboard-page').classList.add('hidden');
+            } else if (state.page === 'dashboard') {
+                document.getElementById('welcome-page').classList.add('hidden');
+                document.getElementById('dashboard-page').classList.remove('hidden');
+                createTabs(); // Ensure tabs are created
+                createContentSections(); // Ensure content sections are created
+                showCourse(state.courseId || 'hr', false); // Render specific course, don't push new history state
+            }
+        }
+
+        // Event listener for browser's back/forward buttons
+        window.onpopstate = function(event) {
+            renderPage(event.state);
+        };
+
+        // Function for the UI back button to go to welcome page
+        function goToWelcomeFromDashboard() {
+            history.pushState({ page: 'welcome' }, '', '#welcome');
+            renderPage({ page: 'welcome' });
+        }
+
+        // Modified showWelcomePage for initial display and browser history
+        function showWelcomePage() {
+            if (history.state?.page !== 'welcome') {
+                history.pushState({ page: 'welcome' }, '', '#welcome');
+            }
+            renderPage({ page: 'welcome' });
+        }
+
+        // Modified showDashboard to push state
+        function showDashboard() {
+            history.pushState({ page: 'dashboard', courseId: 'hr' }, '', '#dashboard/hr');
+            renderPage({ page: 'dashboard', courseId: 'hr' });
+        }
+
+        // Modified showCourse to push state (controlled by parameter)
+        function showCourse(courseId, pushHistory = true) {
+            // Update UI for the course
             document.querySelectorAll('.course-section').forEach(section => {
                 section.classList.add('hidden');
             });
@@ -604,26 +618,14 @@
             });
 
             updateChart(courseId);
-        }
 
-        function showWelcomePage() {
-            document.getElementById('welcome-page').classList.remove('hidden');
-            document.getElementById('dashboard-page').classList.add('hidden');
-        }
-
-        function showDashboard() {
-            document.getElementById('welcome-page').classList.add('hidden');
-            document.getElementById('dashboard-page').classList.remove('hidden');
-            // Re-initialize dashboard elements if needed
-            createTabs();
-            createContentSections();
-            const initialCourseId = 'hr'; // Default course to show on dashboard load
-            showCourse(initialCourseId);
+            // Push history state if explicitly requested (e.g., when clicking tabs)
+            if (pushHistory) {
+                history.pushState({ page: 'dashboard', courseId: courseId }, '', `#dashboard/${courseId}`);
+            }
         }
 
         function showComingSoon(semesterName) {
-            // Using a simple alert for now as per previous instructions to avoid window.alert
-            // For a better UI, consider a modal or a temporary message on the page.
             console.log(`${semesterName} content is coming soon!`);
             alert(`${semesterName} content is coming soon!`);
         }
@@ -642,10 +644,19 @@
             }
         }
 
+        // Initial load logic: determine state from URL hash or default, and replace history
         window.onload = () => {
-            showWelcomePage(); // Show welcome page initially
-            updateDateTime(); // Initial call to display date and time
-            setInterval(updateDateTime, 1000); // Update every second
+            const path = window.location.hash.substring(1); // Get path after #
+            if (path.startsWith('dashboard/')) {
+                const courseId = path.split('/')[1] || 'hr';
+                history.replaceState({ page: 'dashboard', courseId: courseId }, '', `#dashboard/${courseId}`);
+                renderPage({ page: 'dashboard', courseId: courseId });
+            } else {
+                history.replaceState({ page: 'welcome' }, '', '#welcome');
+                renderPage({ page: 'welcome' });
+            }
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
         };
 
         function updateDateTime() {
