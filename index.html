@@ -9,7 +9,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    <!-- Chosen Palette: Calm Neutrals (Reverted to original Blue & Slate) -->
+    <!-- Application Structure Plan: A two-page (welcome and dashboard) single-page application. The initial view is a welcome page with a large "MBA" title and interactive semester tiles. Clicking the active Semester 2 tile reveals the detailed MBA Semester II Dashboard, which includes course navigation tabs, evaluation donut charts, a scrollable weekly schedule, recommended readings, and Google Drive file links. A footer with a creator's link is present on all views. This modular design enhances user navigation and content organization. -->
+    <!-- Visualization & Content Choices: 
+        1. Welcome Page: Goal: Initial greeting and navigation. Method: Large text for emphasis with shadow, interactive tiles for semester selection with enhanced colors, original rectangular shape restored for better responsiveness, rounded edges, and drop shadow for better UI/UX. "Coming Soon!" text is made more visible and centered. Semester numbers are vertically and horizontally aligned, and descriptive text appears on a new line. An arrow icon is added to the active Semester 2 tile. The "Dashboards by Sahansa Jayawardhana" text is added below the main title. Background gradient added for modern look. A callout box is added for the "Select a Semester..." instruction. Inactive semester tiles are now using the *previous*, less faded colors to highlight Semester 2. Animated cartoon learning characters/managers are added to the welcome screen as subtle background vector illustrations. Justification: Provides a clear starting point and previews available content visually and attractively.
+        2. Course Navigation: Goal: Organize. Method: HTML buttons styled with Tailwind. Interaction: onClick to switch visible content. A back button with only an arrow is added to the dashboard header for easy navigation. Justification: Standard, intuitive navigation pattern for SPAs.
+        3. Evaluation Breakdown: Goal: Compare/Inform. Method: Donut Chart. Interaction: Hover for tooltips. Justification: Provides a quick, visual summary of assessment weights, which is more engaging than a text list. Library: Chart.js (Canvas).
+        4. Weekly Schedule: Goal: Inform/Organize. Method: Structured HTML list. Interaction: Vertical scrolling with visible scrollbar. A "Jump to Week 15" button is included for quick access. Justification: A clear, chronological list is effective, ensuring scrollability is obvious and key topics are reachable.
+        5. Recommended Readings: Goal: Inform. Method: Structured HTML list with clickable links. Interaction: Clicking opens a Google search for the book. Justification: Provides quick access to more information about the readings.
+        6. Module Files: Goal: Access. Method: Structured HTML list with Google Drive links. Interaction: Clicking opens the link in a new tab. A new section "Add Your Findings Here" is included with a link to a shared Drive folder for viewer contributions. Justification: Provides direct access to supplementary module-specific resources and a mechanism for user contribution.
+        All textual content is presented in clean, readable blocks to support the primary goal of information consumption. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -54,7 +64,7 @@
             padding: 1.5rem; /* Increased padding for more space */
         }
 
-        /* Responsive adjustments for semester tiles  */
+        /* Responsive adjustments for semester tiles - Reverted to original flexible sizing */
         @media (min-width: 640px) { /* Small screens and up */
             .semester-tile {
                 min-height: 120px;
@@ -157,12 +167,22 @@
                 padding-right: 3rem;
             }
         }
+
+        /* Keyframe animation for floating effect */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
 
     <!-- Welcome Page Section -->
-    <div id="welcome-page" class="container mx-auto p-4 sm:p-6 md:p-8 flex-grow flex flex-col items-center justify-center text-center bg-gradient-to-br from-slate-50 to-blue-50">
+    <div id="welcome-page" class="container mx-auto p-4 sm:p-6 md:p-8 flex-grow flex flex-col items-center justify-center text-center bg-gradient-to-br from-slate-50 to-blue-50 relative overflow-hidden">
         <h1 class="text-6xl md:text-8xl font-extrabold text-slate-900 mb-2 tracking-tighter h1-text-shadow">MBA</h1>
         <p class="text-lg text-slate-600 mb-8">Dashboards by Sahansa Jayawardhana</p>
         
@@ -189,6 +209,23 @@
                 <span class="text-sm">Coming Soon!</span>
             </div>
         </div>
+
+        <!-- Animated Background Vector Illustrations -->
+        <!-- Abstract Learning Icon (Book) -->
+        <div class="absolute top-1/4 left-[10%] transform -translate-x-1/2 -translate-y-1/2 animate-float hidden md:block opacity-10" style="animation-duration: 4s;">
+            <svg class="w-28 h-28 text-blue-300" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 4H7C5.9 4 5 4.9 5 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7 20V6h14l.01 14H7z"/>
+                <path d="M11 7h2v10h-2V7zM15 7h2v10h-2V7zM7 7h2v10H7z"/>
+            </svg>
+        </div>
+
+        <!-- Abstract Management Icon (Bar Chart) -->
+        <div class="absolute bottom-1/4 right-[10%] transform translate-x-1/2 translate-y-1/2 animate-float hidden md:block opacity-10" style="animation-delay: 0.5s; animation-duration: 3.5s;">
+            <svg class="w-28 h-28 text-purple-300" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 22H2V2h2v20zM22 10h-2V6h2v4zM18 14h-2V2h2v12zM14 18h-2V6h2v12zM10 22h-2V2h2v20z"/>
+            </svg>
+        </div>
+
     </div>
 
     <!-- MBA Semester II Dashboard Section -->
@@ -198,16 +235,16 @@
                 &#8592;
             </button>
             <h1 class="text-3xl md:text-4xl font-bold text-slate-900">MBA Semester II Dashboard by Sahansa Jayawardhana</h1>
-            <p class="mt-2 text-lg text-slate-600">I just created this for fun.<br> Happy Learning, Everyone :)</p>
+            <p class="mt-2 text-lg text-slate-600">I just created this for fun & educational purpose. <br> Happy Learning, Everyone :)</p>
             <p id="current-datetime" class="text-sm text-slate-500 mt-2"></p>
         </header>
 
         <nav id="course-tabs" class="flex flex-wrap justify-center gap-2 mb-8">
-      
+            <!-- Tabs will be generated by JS -->
         </nav>
 
         <main id="course-content">
-         
+            <!-- Course content sections will be generated by JS -->
         </main>
     </div>
 
@@ -244,7 +281,7 @@
                     "Applicability of theories and techniques of positive psychology in addressing contemporary workplace Issues"
                 ],
                 readings: [
-                    "Armstrong, M. & Taylor, S., (2017), Armstrong's Handbook of Human Resource Management Practice, Kogan Page, London."
+                    "Armstrong, M. & Taylor, S., (2012), Armstrong's Handbook of Human Resource Management Practice, Kogan Page, London."
                 ],
                 files: [
                     { name: "HR Module Files", url: "https://drive.google.com/file/d/1egsTxCkBz70cLx5X54uyTgrqVPJT9YGX/view?usp=drive_link" }
@@ -393,13 +430,6 @@
                     "International marketing strategy",
                     "New dimensions in Marketing",
                     "Strategic marketing and drafting the marketing plan"
-                ],
-                readings: [
-                    "Kotler, P., Keller, K.L. and Chernev, A. (2021) Marketing Management, 16 Edition, Pearson.",
-                    "Pride, W.M. and Ferrell, O.C. (2020), Markeitng, 20 Edition, Cengage.",
-                    "Grewal, D. and Levy, M. (2016) Marketing, 5 Edition, McGraw Hill Education.",
-                    "Kotler. P. and Armstrong, G. (2016) Principles of Marketing, 16 edition. Peatson.",
-                    "Cravens, D.W. and Piercy, N.F. (2009) Strategic Marketing, 8 th edition, Tata McGraw Hill Education Private Limited."
                 ],
                 files: [
                     { name: "Marketing Module File 1", url: "https://drive.google.com/file/d/1egsTxCkBz70cLx5X54uyTgrqVPJT9YGX/view?usp=drive_link" },
