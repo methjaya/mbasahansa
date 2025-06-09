@@ -12,8 +12,8 @@
     <!-- Chosen Palette: Calm Neutrals (Reverted to original Blue & Slate) -->
     <!-- Application Structure Plan: A two-page (welcome and dashboard) single-page application. The initial view is a welcome page with a large "MBA" title and interactive semester tiles. Clicking the active Semester 2 tile reveals the detailed MBA Semester II Dashboard, which includes course navigation tabs, evaluation donut charts, a scrollable weekly schedule, recommended readings, and Google Drive file links. A footer with a creator's link is present on all views. This modular design enhances user navigation and content organization. -->
     <!-- Visualization & Content Choices: 
-        1. Welcome Page: Goal: Initial greeting and navigation. Method: Large text for emphasis, interactive tiles for semester selection with enhanced colors, smaller size, rounded edges, and drop shadow for better UI/UX. "Coming Soon!" text is made more visible and centered. Semester numbers are vertically and horizontally aligned, and descriptive text appears on a new line. An arrow icon is added to the active Semester 2 tile. The "Dashboards by Sahansa Jayawardhana" text is added below the main title. Justification: Provides a clear starting point and previews available content visually and attractively.
-        2. Course Navigation: Goal: Organize. Method: HTML buttons styled with Tailwind. Interaction: onClick to switch visible content. Justification: Standard, intuitive navigation pattern for SPAs.
+        1. Welcome Page: Goal: Initial greeting and navigation. Method: Large text for emphasis with shadow, interactive tiles for semester selection with enhanced colors, smaller size, rounded edges, and drop shadow for better UI/UX. "Coming Soon!" text is made more visible and centered. Semester numbers are vertically and horizontally aligned, and descriptive text appears on a new line. An arrow icon is added to the active Semester 2 tile. The "Dashboards by Sahansa Jayawardhana" text is added below the main title. Background gradient added for modern look. Justification: Provides a clear starting point and previews available content visually and attractively.
+        2. Course Navigation: Goal: Organize. Method: HTML buttons styled with Tailwind. Interaction: onClick to switch visible content. A back button with only an arrow is added to the dashboard header for easy navigation. Justification: Standard, intuitive navigation pattern for SPAs.
         3. Evaluation Breakdown: Goal: Compare/Inform. Method: Donut Chart. Interaction: Hover for tooltips. Justification: Provides a quick, visual summary of assessment weights, which is more engaging than a text list. Library: Chart.js (Canvas).
         4. Weekly Schedule: Goal: Inform/Organize. Method: Structured HTML list. Interaction: Vertical scrolling with visible scrollbar. A "Jump to Week 15" button is included for quick access. Justification: A clear, chronological list is effective, ensuring scrollability is obvious and key topics are reachable.
         5. Recommended Readings: Goal: Inform. Method: Structured HTML list with clickable links. Interaction: Clicking opens a Google search for the book. Justification: Provides quick access to more information about the readings.
@@ -60,12 +60,8 @@
             min-height: 100px; /* Reduced height */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
             border-radius: 1rem; /* More rounded */
-            /* Ensure content is centered vertically with flexbox */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.25rem; /* Small gap between title and description */
+            text-align: center; /* Ensure internal text is centered */
+            padding: 1.5rem; /* Increased padding for more space */
         }
         .semester-tile:hover {
             transform: translateY(-3px);
@@ -78,8 +74,9 @@
         .semester-tile .text-sm {
             font-size: 0.875rem; /* Equivalent to text-sm from Tailwind */
             line-height: 1.25rem;
-            text-align: center; /* Center text */
             opacity: 0.9; /* Make it slightly more visible */
+            display: block; /* Ensure it takes its own line */
+            margin-top: 0.5rem; /* Explicit margin to separate from title */
         }
         /* Specific colors for each semester tile */
         #semester-1-tile {
@@ -113,13 +110,49 @@
             background-color: #FBCFE8; /* pink-300 */
             color: #831843; /* pink-900 */
         }
+        /* Styling for the MBA title text shadow */
+        .h1-text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        /* Back button styling */
+        .back-button {
+            position: absolute;
+            left: 1rem; /* Adjust as needed */
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 0.5rem; /* Smaller padding for just an arrow */
+            background-color: #E2E8F0; /* slate-200 */
+            color: #475569; /* slate-700 */
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s, transform 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            line-height: 1; /* Ensure arrow is vertically centered */
+            font-size: 1.5rem; /* Larger arrow for visibility */
+        }
+        .back-button:hover {
+            background-color: #CBD5E1; /* slate-300 */
+            transform: translateY(-50%) scale(1.05);
+        }
+        /* Responsive adjustments for the back button */
+        @media (max-width: 640px) { /* Small screens */
+            .back-button {
+                left: 0.5rem;
+                padding: 0.4rem;
+                font-size: 1.25rem;
+            }
+            header .text-center {
+                padding-left: 3rem; /* Add padding to prevent title overlap with button */
+                padding-right: 3rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
 
     <!-- Welcome Page Section -->
-    <div id="welcome-page" class="container mx-auto p-4 sm:p-6 md:p-8 flex-grow flex flex-col items-center justify-center text-center">
-        <h1 class="text-6xl md:text-8xl font-extrabold text-slate-900 mb-2 tracking-tighter">MBA</h1>
+    <div id="welcome-page" class="container mx-auto p-4 sm:p-6 md:p-8 flex-grow flex flex-col items-center justify-center text-center bg-gradient-to-br from-slate-50 to-blue-50">
+        <h1 class="text-6xl md:text-8xl font-extrabold text-slate-900 mb-2 tracking-tighter h1-text-shadow">MBA</h1>
         <p class="text-lg text-slate-600 mb-8">Dashboards by Sahansa Jayawardhana</p>
         
         <p class="mt-2 text-lg text-slate-600 mb-8">Select a Semester to begin your learning journey.</p>
@@ -146,7 +179,10 @@
 
     <!-- MBA Semester II Dashboard Section -->
     <div id="dashboard-page" class="container mx-auto p-4 sm:p-6 md:p-8 flex-grow hidden">
-        <header class="text-center mb-8">
+        <header class="text-center mb-8 relative">
+            <button onclick="showWelcomePage()" class="back-button">
+                &#8592;
+            </button>
             <h1 class="text-3xl md:text-4xl font-bold text-slate-900">MBA Semester II Dashboard by Sahansa Jayawardhana</h1>
             <p class="mt-2 text-lg text-slate-600">I just created this for fun & educational purpose. <br> Happy Learning, Everyone :)</p>
             <p id="current-datetime" class="text-sm text-slate-500 mt-2"></p>
