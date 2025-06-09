@@ -141,25 +141,25 @@
             left: 1rem; /* Adjust as needed */
             top: 50%;
             transform: translateY(-50%);
-            padding: 0.5rem; /* Smaller padding for just an arrow */
-            background-color: #E2E8F0; /* slate-200 */
+            padding: 0; /* Removed padding */
+            background-color: transparent; /* Made transparent */
             color: #475569; /* slate-700 */
             border-radius: 0.5rem;
             font-weight: 600;
             transition: background-color 0.2s, transform 0.2s;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            box-shadow: none; /* Removed box shadow */
             line-height: 1; /* Ensure arrow is vertically centered */
             font-size: 1.5rem; /* Larger arrow for visibility */
         }
         .back-button:hover {
-            background-color: #CBD5E1; /* slate-300 */
+            background-color: #CBD5E1; /* slate-300 on hover (can be adjusted) */
             transform: translateY(-50%) scale(1.05);
         }
         /* Responsive adjustments for the back button */
         @media (max-width: 640px) { /* Small screens */
             .back-button {
                 left: 0.5rem;
-                padding: 0.4rem;
+                padding: 0; /* Removed padding */
                 font-size: 1.25rem;
             }
             /* Adjusted padding for header text to avoid overlap on small screens */
