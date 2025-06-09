@@ -10,14 +10,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Calm Neutrals (Reverted to original Blue & Slate) -->
-    <!-- Application Structure Plan: A tab-based single-page application. The top navigation consists of buttons for each of the five courses. Clicking a tab reveals a dedicated section for that course, which includes its aim, evaluation donut chart, weekly schedule, recommended readings, and a new "Access Recommended Readings Drive Files" section with Google Drive links. A footer with a link to the creator's website is present. This structure was chosen to provide a clean, focused view of one subject at a time, preventing information overload, and integrating all relevant content. -->
+    <!-- Application Structure Plan: A two-page (welcome and dashboard) single-page application. The initial view is a welcome page with a large "MBA" title and interactive semester tiles. Clicking the active Semester 2 tile reveals the detailed MBA Semester II Dashboard, which includes course navigation tabs, evaluation donut charts, a scrollable weekly schedule, recommended readings, and Google Drive file links. A footer with a creator's link is present on all views. This modular design enhances user navigation and content organization. -->
     <!-- Visualization & Content Choices: 
-        1. Course Navigation: Goal: Organize. Method: HTML buttons styled with Tailwind. Interaction: onClick to switch visible content. Justification: Standard, intuitive navigation pattern for SPAs.
-        2. Evaluation Breakdown: Goal: Compare/Inform. Method: Donut Chart. Interaction: Hover for tooltips. Justification: Provides a quick, visual summary of assessment weights, which is more engaging than a text list. Library: Chart.js (Canvas).
-        3. Weekly Schedule: Goal: Inform/Organize. Method: Structured HTML list. Interaction: Vertical scrolling with visible scrollbar. Justification: A clear, chronological list is the most effective way to present the weekly topics, ensuring scrollability is obvious.
-        4. Recommended Readings: Goal: Inform. Method: Structured HTML list with clickable links. Interaction: Clicking opens a Google search for the book. Justification: Provides quick access to more information about the readings.
-        5. Module Files: Goal: Access. Method: Structured HTML list with Google Drive links. Interaction: Clicking opens the link in a new tab. Justification: Provides direct access to supplementary module-specific resources.
-        All textual content (aims, topics, readings, module files) is presented in clean, readable blocks to support the primary goal of information consumption. -->
+        1. Welcome Page: Goal: Initial greeting and navigation. Method: Large text for emphasis, interactive tiles for semester selection with enhanced colors, smaller size, rounded edges, and drop shadow for better UI/UX. "Coming Soon!" text is made more visible and centered. Semester numbers are vertically and horizontally aligned, and descriptive text appears on a new line. An arrow icon is added to the active Semester 2 tile. The "Dashboards by Sahansa Jayawardhana" text is added below the main title. Justification: Provides a clear starting point and previews available content visually and attractively.
+        2. Course Navigation: Goal: Organize. Method: HTML buttons styled with Tailwind. Interaction: onClick to switch visible content. Justification: Standard, intuitive navigation pattern for SPAs.
+        3. Evaluation Breakdown: Goal: Compare/Inform. Method: Donut Chart. Interaction: Hover for tooltips. Justification: Provides a quick, visual summary of assessment weights, which is more engaging than a text list. Library: Chart.js (Canvas).
+        4. Weekly Schedule: Goal: Inform/Organize. Method: Structured HTML list. Interaction: Vertical scrolling with visible scrollbar. A "Jump to Week 15" button is included for quick access. Justification: A clear, chronological list is effective, ensuring scrollability is obvious and key topics are reachable.
+        5. Recommended Readings: Goal: Inform. Method: Structured HTML list with clickable links. Interaction: Clicking opens a Google search for the book. Justification: Provides quick access to more information about the readings.
+        6. Module Files: Goal: Access. Method: Structured HTML list with Google Drive links. Interaction: Clicking opens the link in a new tab. Justification: Provides direct access to supplementary module-specific resources.
+        All textual content is presented in clean, readable blocks to support the primary goal of information consumption. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
@@ -53,11 +54,98 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #555; /* color of the scrollbar handle on hover */
         }
+        .semester-tile {
+            @apply flex flex-col items-center justify-center p-4 rounded-xl shadow-md transition-all duration-300 ease-in-out;
+            cursor: pointer;
+            min-height: 100px; /* Reduced height */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+            border-radius: 1rem; /* More rounded */
+            /* Ensure content is centered vertically with flexbox */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem; /* Small gap between title and description */
+        }
+        .semester-tile:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .semester-tile .text-3xl {
+            font-size: 1.875rem; /* Equivalent to text-3xl from Tailwind */
+            line-height: 2.25rem;
+        }
+        .semester-tile .text-sm {
+            font-size: 0.875rem; /* Equivalent to text-sm from Tailwind */
+            line-height: 1.25rem;
+            text-align: center; /* Center text */
+            opacity: 0.9; /* Make it slightly more visible */
+        }
+        /* Specific colors for each semester tile */
+        #semester-1-tile {
+            background-color: #F97316; /* orange-500 */
+            color: white;
+        }
+        #semester-1-tile.inactive {
+            background-color: #FDBA74; /* orange-300 */
+            color: #7C2D12; /* orange-900 */
+        }
+        #semester-2-tile {
+            background-color: #3B82F6; /* blue-500 */
+            color: white;
+        }
+        #semester-2-tile.active {
+            background-color: #2563EB; /* blue-600 on hover */
+        }
+        #semester-3-tile {
+            background-color: #8B5CF6; /* purple-500 */
+            color: white;
+        }
+        #semester-3-tile.inactive {
+            background-color: #C4B5FD; /* purple-300 */
+            color: #5B21B6; /* purple-900 */
+        }
+        #semester-4-tile {
+            background-color: #EC4899; /* pink-500 */
+            color: white;
+        }
+        #semester-4-tile.inactive {
+            background-color: #FBCFE8; /* pink-300 */
+            color: #831843; /* pink-900 */
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
 
-    <div class="container mx-auto p-4 sm:p-6 md:p-8 flex-grow">
+    <!-- Welcome Page Section -->
+    <div id="welcome-page" class="container mx-auto p-4 sm:p-6 md:p-8 flex-grow flex flex-col items-center justify-center text-center">
+        <h1 class="text-6xl md:text-8xl font-extrabold text-slate-900 mb-2 tracking-tighter">MBA</h1>
+        <p class="text-lg text-slate-600 mb-8">Dashboards by Sahansa Jayawardhana</p>
+        
+        <p class="mt-2 text-lg text-slate-600 mb-8">Select a Semester to begin your learning journey.</p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-4xl">
+            <div id="semester-1-tile" class="semester-tile inactive" onclick="showComingSoon('Semester 1')">
+                <span class="text-3xl font-bold">Semester 1</span>
+                <span class="text-sm">Coming Soon!</span>
+            </div>
+            <div id="semester-2-tile" class="semester-tile active" onclick="showDashboard()">
+                <span class="text-3xl font-bold">Semester 2</span>
+                <span class="text-sm flex items-center justify-center">Current Academic Year <span class="ml-2">&#8594;</span></span>
+            </div>
+            <div id="semester-3-tile" class="semester-tile inactive" onclick="showComingSoon('Semester 3')">
+                <span class="text-3xl font-bold">Semester 3</span>
+                <span class="text-sm">Coming Soon!</span>
+            </div>
+            <div id="semester-4-tile" class="semester-tile inactive" onclick="showComingSoon('Semester 4')">
+                <span class="text-3xl font-bold">Semester 4</span>
+                <span class="text-sm">Coming Soon!</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MBA Semester II Dashboard Section -->
+    <div id="dashboard-page" class="container mx-auto p-4 sm:p-6 md:p-8 flex-grow hidden">
         <header class="text-center mb-8">
             <h1 class="text-3xl md:text-4xl font-bold text-slate-900">MBA Semester II Dashboard by Sahansa Jayawardhana</h1>
             <p class="mt-2 text-lg text-slate-600">I just created this for fun & educational purpose. <br> Happy Learning, Everyone :)</p>
@@ -274,6 +362,7 @@
 
         function createTabs() {
             const tabsContainer = document.getElementById('course-tabs');
+            tabsContainer.innerHTML = ''; // Clear existing tabs
             Object.values(courseData).forEach(course => {
                 const tab = document.createElement('button');
                 tab.textContent = course.title;
@@ -286,6 +375,7 @@
 
         function createContentSections() {
             const contentContainer = document.getElementById('course-content');
+            contentContainer.innerHTML = ''; // Clear existing content sections
             Object.values(courseData).forEach(course => {
                 const section = document.createElement('div');
                 section.id = `content-${course.id}`;
@@ -304,9 +394,12 @@
                         </div>
                         <div class="lg:col-span-1 flex flex-col">
                             <h3 class="text-lg font-semibold text-slate-700 mb-4">Weekly Lecture Schedule <br> (1-15 Weeks)</h3>
-                            <div class="max-h-[250px] overflow-y-auto pr-2 space-y-3 mb-6 custom-scrollbar flex-grow">
+                            <button onclick="scrollToWeek15('${course.id}')" class="mb-4 px-4 py-2 bg-blue-100 text-blue-700 rounded-lg font-semibold hover:bg-blue-200 transition-colors duration-200 self-center">
+                                Jump to Week 15
+                            </button>
+                            <div class="max-h-[300px] overflow-y-auto pr-2 space-y-3 mb-6 custom-scrollbar flex-grow">
                                 ${course.topics.map((topic, index) => `
-                                    <div class="flex items-start p-3 rounded-lg ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} border border-slate-200">
+                                    <div id="week-${index + 1}-topic-${course.id}" class="flex items-start p-3 rounded-lg ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} border border-slate-200 ${index === 14 ? 'bg-blue-50 text-blue-800 font-bold' : ''}">
                                         <div class="flex-shrink-0 bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4">${index + 1}</div>
                                         <p class="text-slate-700 self-center">${topic}</p>
                                     </div>
@@ -323,7 +416,7 @@
                                     `).join('') : '<p class="text-slate-600 p-2">N/A</p>'}
                             </div>
 
-                            <h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">Access Drive Uploaded Recommended Readings</h3>
+                            <h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">Access Recommended Readings Drive Files</h3>
                             <div class="max-h-[150px] overflow-y-auto pr-2 space-y-2 custom-scrollbar flex-grow">
                                 ${course.files && course.files.length > 0 ? 
                                     course.files.map((file, index) => `
@@ -420,11 +513,44 @@
             updateChart(courseId);
         }
 
-        window.onload = () => {
+        function showWelcomePage() {
+            document.getElementById('welcome-page').classList.remove('hidden');
+            document.getElementById('dashboard-page').classList.add('hidden');
+        }
+
+        function showDashboard() {
+            document.getElementById('welcome-page').classList.add('hidden');
+            document.getElementById('dashboard-page').classList.remove('hidden');
+            // Re-initialize dashboard elements if needed
             createTabs();
             createContentSections();
-            const initialCourseId = 'hr';
+            const initialCourseId = 'hr'; // Default course to show on dashboard load
             showCourse(initialCourseId);
+        }
+
+        function showComingSoon(semesterName) {
+            // Using a simple alert for now as per previous instructions to avoid window.alert
+            // For a better UI, consider a modal or a temporary message on the page.
+            console.log(`${semesterName} content is coming soon!`);
+            alert(`${semesterName} content is coming soon!`);
+        }
+
+        function scrollToWeek15(courseId) {
+            const week15Element = document.getElementById(`week-15-topic-${courseId}`);
+            if (week15Element) {
+                const scrollContainer = week15Element.closest('.custom-scrollbar');
+                if (scrollContainer) {
+                    const offset = week15Element.offsetTop - scrollContainer.offsetTop;
+                    scrollContainer.scrollTo({
+                        top: offset,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        }
+
+        window.onload = () => {
+            showWelcomePage(); // Show welcome page initially
             updateDateTime(); // Initial call to display date and time
             setInterval(updateDateTime, 1000); // Update every second
         };
