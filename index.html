@@ -12,7 +12,7 @@
     <!-- Chosen Palette: Calm Neutrals (Reverted to original Blue & Slate) -->
     <!-- Application Structure Plan: A two-page (welcome and dashboard) single-page application. The initial view is a welcome page with a large "MBA" title and interactive semester tiles. Clicking the active Semester 2 tile reveals the detailed MBA Semester II Dashboard, which includes course navigation tabs, evaluation donut charts, a scrollable weekly schedule, recommended readings, and Google Drive file links. A footer with a creator's link is present on all views. This modular design enhances user navigation and content organization. -->
     <!-- Visualization & Content Choices: 
-        1. Welcome Page: Goal: Initial greeting and navigation. Method: Large text for emphasis with shadow, interactive tiles for semester selection with enhanced colors, smaller size, rounded edges, and drop shadow for better UI/UX. "Coming Soon!" text is made more visible and centered. Semester numbers are vertically and horizontally aligned, and descriptive text appears on a new line. An arrow icon is added to the active Semester 2 tile. The "Dashboards by Sahansa Jayawardhana" text is added below the main title. Background gradient added for modern look. A callout box is added for the "Select a Semester..." instruction. Justification: Provides a clear starting point and previews available content visually and attractively.
+        1. Welcome Page: Goal: Initial greeting and navigation. Method: Large text for emphasis with shadow, interactive tiles for semester selection with enhanced colors, original rectangular shape restored for better responsiveness, rounded edges, and drop shadow for better UI/UX. "Coming Soon!" text is made more visible and centered. Semester numbers are vertically and horizontally aligned, and descriptive text appears on a new line. An arrow icon is added to the active Semester 2 tile. The "Dashboards by Sahansa Jayawardhana" text is added below the main title. Background gradient added for modern look. A callout box is added for the "Select a Semester..." instruction. Inactive semester tiles are now using the *previous*, less faded colors to highlight Semester 2. Justification: Provides a clear starting point and previews available content visually and attractively.
         2. Course Navigation: Goal: Organize. Method: HTML buttons styled with Tailwind. Interaction: onClick to switch visible content. A back button with only an arrow is added to the dashboard header for easy navigation. Justification: Standard, intuitive navigation pattern for SPAs.
         3. Evaluation Breakdown: Goal: Compare/Inform. Method: Donut Chart. Interaction: Hover for tooltips. Justification: Provides a quick, visual summary of assessment weights, which is more engaging than a text list. Library: Chart.js (Canvas).
         4. Weekly Schedule: Goal: Inform/Organize. Method: Structured HTML list. Interaction: Vertical scrolling with visible scrollbar. A "Jump to Week 15" button is included for quick access. Justification: A clear, chronological list is effective, ensuring scrollability is obvious and key topics are reachable.
@@ -55,37 +55,32 @@
             background: #555; /* color of the scrollbar handle on hover */
         }
         .semester-tile {
-            @apply flex flex-col items-center justify-center rounded-xl shadow-md transition-all duration-300 ease-in-out;
+            @apply flex flex-col items-center justify-center p-4 rounded-xl shadow-md transition-all duration-300 ease-in-out;
             cursor: pointer;
+            min-height: 100px; /* Adjusted height for responsiveness */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
             border-radius: 1rem; /* More rounded */
             text-align: center; /* Ensure internal text is centered */
-            padding: 1rem; /* Reduced padding for smaller size */
-            aspect-ratio: 1 / 1; /* Make it square */
-            width: 120px; /* Explicit smaller width for the square */
-            height: 120px; /* Explicit smaller height for the square */
+            padding: 1.5rem; /* Increased padding for more space */
         }
 
-        /* Responsive adjustments for semester tiles */
+        /* Responsive adjustments for semester tiles - Reverted to original flexible sizing */
         @media (min-width: 640px) { /* Small screens and up */
             .semester-tile {
-                width: 140px; /* Slightly larger on larger screens */
-                height: 140px;
-                padding: 1.25rem;
+                min-height: 120px;
+                padding: 1.5rem;
             }
         }
         @media (min-width: 768px) { /* Medium screens and up */
             .semester-tile {
-                width: 160px; /* Even larger on medium screens */
-                height: 160px;
-                padding: 1.5rem;
+                min-height: 140px;
+                padding: 1.75rem;
             }
         }
         @media (min-width: 1024px) { /* Large screens and up */
             .semester-tile {
-                width: 180px; /* Default size for large screens */
-                height: 180px;
-                padding: 1.5rem;
+                min-height: 160px;
+                padding: 2rem;
             }
         }
 
@@ -94,15 +89,15 @@
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .semester-tile .text-3xl {
-            font-size: 1.5rem; /* Adjusted font size for smaller tiles */
-            line-height: 1.75rem;
+            font-size: 1.875rem; /* Reverted to original font size for titles */
+            line-height: 2.25rem;
         }
         .semester-tile .text-sm {
-            font-size: 0.75rem; /* Adjusted font size for smaller tiles */
-            line-height: 1rem;
+            font-size: 0.875rem; /* Reverted to original font size for descriptions */
+            line-height: 1.25rem;
             opacity: 0.9; /* Make it slightly more visible */
             display: block; /* Ensure it takes its own line */
-            margin-top: 0.25rem; /* Explicit margin to separate from title */
+            margin-top: 0.5rem; /* Explicit margin to separate from title */
         }
         /* Specific colors for each semester tile */
         #semester-1-tile {
