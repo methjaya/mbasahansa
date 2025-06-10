@@ -10,9 +10,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Base styles for the body and overall typography */
         body {
             font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition for theme change */
         }
+        /* Chart container styling for responsiveness */
         .chart-container {
             position: relative;
             width: 100%;
@@ -20,6 +23,7 @@
             height: 320px;
             margin: auto;
         }
+        /* Active and inactive tab styling for light mode */
         .tab-active {
             background-color: #3b82f6; /* blue-500 */
             color: white;
@@ -28,7 +32,7 @@
             background-color: #e5e7eb; /* gray-200 */
             color: #374151; /* gray-700 */
         }
-        /* Custom scrollbar styling for Webkit browsers */
+        /* Custom scrollbar styling for Webkit browsers (light mode) */
         .custom-scrollbar::-webkit-scrollbar {
             width: 8px; /* width of the scrollbar */
         }
@@ -43,6 +47,7 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #555; /* color of the scrollbar handle on hover */
         }
+        /* Semester tile base styling */
         .semester-tile {
             @apply flex flex-col items-center justify-center p-4 rounded-xl shadow-md transition-all duration-300 ease-in-out;
             cursor: pointer;
@@ -52,8 +57,7 @@
             text-align: center; /* Ensure internal text is centered */
             padding: 1.5rem; /* Increased padding for more space */
         }
-
-        /* Responsive adjustments for semester tiles - Reverted to original flexible sizing */
+        /* Responsive adjustments for semester tiles */
         @media (min-width: 640px) { /* Small screens and up */
             .semester-tile {
                 min-height: 120px;
@@ -72,11 +76,12 @@
                 padding: 2rem;
             }
         }
-
+        /* Hover effect for semester tiles */
         .semester-tile:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+        /* Typography within semester tiles */
         .semester-tile .text-3xl {
             font-size: 1.875rem; /* Reverted to original font size for titles */
             line-height: 2.25rem;
@@ -88,7 +93,7 @@
             display: block; /* Ensure it takes its own line */
             margin-top: 0.5rem; /* Explicit margin to separate from title */
         }
-        /* Specific colors for each semester tile */
+        /* Specific colors for each semester tile (light mode) */
         #semester-1-tile {
             background-color: #F97316; /* orange-500 */
             color: white;
@@ -120,29 +125,28 @@
             background-color: #FBCFE8; /* pink-300 */
             color: #831843; /* pink-900 */
         }
-        /* Styling for the MBA title text shadow */
+        /* Styling for the MBA title text shadow (light mode) */
         .h1-text-shadow {
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
-        /* Back button styling */
+        /* Back button styling (light mode) */
         .back-button {
-            /* Removed absolute positioning */
             background-color: transparent;
             color: #475569; /* slate-700 */
-            border-radius: 0.5rem; /* Still relevant for hover effect */
+            border-radius: 0.5rem;
             font-weight: 600;
-            transition: background-color 0.2s, transform 0.2s, color 0.2s; /* Added color transition */
-            box-shadow: none; /* Removed box shadow */
-            font-size: 1.25rem; /* Slightly smaller for text, or keep 1.5rem for arrow dominant */
-            padding: 0.25rem 0.75rem; /* Add some padding back for hover area */
-            display: inline-flex; /* To align arrow and text */
-            gap: 0.5rem; /* Space between arrow and text */
+            transition: background-color 0.2s, transform 0.2s, color 0.2s;
+            box-shadow: none;
+            font-size: 1.25rem;
+            padding: 0.25rem 0.75rem;
+            display: inline-flex;
+            gap: 0.5rem;
             align-items: center;
         }
         .back-button:hover {
             background-color: #E2E8F0; /* Light background on hover */
             color: #1e293b; /* slate-900 */
-            transform: scale(1.02); /* Subtle scale effect */
+            transform: scale(1.02);
         }
         /* Responsive adjustments for the back button */
         @media (max-width: 640px) { /* Small screens */
@@ -161,9 +165,205 @@
         .animate-float {
             animation: float 3s ease-in-out infinite;
         }
+
+        /* Dark mode specific overrides - applied when 'dark' class is on <html> */
+        html.dark body {
+            background-color: #1a202c; /* slate-900 */
+            color: #e2e8f0; /* slate-200 */
+        }
+        html.dark .bg-slate-50 {
+            background-color: #1a202c; /* slate-900 */
+        }
+        html.dark .text-slate-800 {
+            color: #e2e8f0; /* slate-200 */
+        }
+        html.dark .text-slate-900 {
+            color: #f8fafc; /* slate-50 */
+        }
+        html.dark .text-slate-600 {
+            color: #cbd5e0; /* slate-300 */
+        }
+        html.dark .bg-gradient-to-br {
+            background-image: linear-gradient(to bottom right, #1a202c, #2d3748); /* Darker gradient */
+        }
+        html.dark .from-slate-50 {
+            background-color: #1a202c;
+        }
+        html.dark .to-blue-50 {
+            background-color: #2d3748;
+        }
+        html.dark .bg-blue-100 {
+            background-color: #1e3a8a; /* blue-800 */
+        }
+        html.dark .border-blue-500 {
+            border-color: #3b82f6; /* blue-500 */
+        }
+        html.dark .text-blue-700 {
+            color: #93c5fd; /* blue-300 */
+        }
+        html.dark .shadow-md {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        html.dark .text-purple-300 {
+            color: #a78bfa; /* purple-400 */
+        }
+        /* Dark mode active/inactive tab styling */
+        html.dark .tab-active {
+            background-color: #2563eb; /* blue-600 for dark mode active tab */
+            color: white;
+        }
+        html.dark .tab-inactive {
+            background-color: #4a5568; /* slate-700 */
+            color: #cbd5e0; /* slate-300 */
+        }
+        /* Dark mode scrollbar styling */
+        html.dark .custom-scrollbar::-webkit-scrollbar-track {
+            background: #334155; /* slate-700 */
+        }
+        html.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #64748b; /* slate-600 */
+        }
+        html.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #475569; /* slate-700 */
+        }
+        /* Dark mode semester tile hover effect */
+        html.dark .semester-tile:hover {
+            box-shadow: 0 6px 10px rgba(255, 255, 255, 0.1), 0 2px 5px rgba(255, 255, 255, 0.08);
+        }
+        /* Dark mode specific colors for inactive semester tiles */
+        html.dark #semester-1-tile.inactive {
+            background-color: #c2410c; /* dark orange-700 */
+            color: #fed7aa; /* orange-200 */
+        }
+        html.dark #semester-2-tile.active {
+            background-color: #1d4ed8; /* blue-700 for dark mode */
+        }
+        html.dark #semester-3-tile.inactive {
+            background-color: #7c3aed; /* dark purple-600 */
+            color: #e9d5ff; /* purple-200 */
+        }
+        html.dark #semester-4-tile.inactive {
+            background-color: #be185d; /* dark pink-700 */
+            color: #fce7f3; /* pink-200 */
+        }
+        /* Dark mode MBA title text shadow */
+        html.dark .h1-text-shadow {
+            text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.1);
+        }
+        /* Dark mode back button styling */
+        html.dark .back-button {
+            color: #94a3b8; /* slate-400 */
+        }
+        html.dark .back-button:hover {
+            background-color: #334155; /* slate-700 */
+            color: #f1f5f9; /* slate-100 */
+        }
+        /* Dark mode specific styling for lecture schedule list items */
+        html.dark .course-section .bg-slate-50 {
+            background-color: #2d3748; /* slate-800 */
+        }
+        html.dark .course-section .bg-white {
+            background-color: #1a202c; /* slate-900 */
+        }
+        html.dark .course-section .border-slate-200 {
+            border-color: #4a5568; /* slate-700 */
+        }
+        html.dark .course-section .text-slate-700 {
+            color: #cbd5e0; /* slate-300 */
+        }
+        html.dark .course-section .text-blue-600 {
+            color: #60a5fa; /* blue-400 */
+        }
+        html.dark .course-section .bg-blue-50 {
+            background-color: #1e3a8a; /* blue-800 */
+            color: #bfdbfe; /* blue-200 */
+        }
+        html.dark .course-section .text-blue-800 {
+            color: #bfdbfe; /* blue-200 */
+        }
+        html.dark .course-section .bg-green-500 {
+            background-color: #16a34a; /* green-600 */
+        }
+        html.dark .course-section .hover:bg-green-600:hover {
+            background-color: #15803d; /* green-700 */
+        }
+        html.dark footer {
+            background-color: #2d3748; /* slate-800 */
+            color: #cbd5e0; /* slate-300 */
+        }
+        html.dark .text-slate-500 {
+            color: #94a3b8; /* slate-400 */
+        }
+
+        /* Modal specific styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+        }
+        html.dark .modal-content {
+            background-color: #2d3748; /* Dark mode background */
+            color: #e2e8f0; /* Dark mode text */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+        }
+        html.dark .close-button {
+            color: #e2e8f0;
+        }
+        html.dark .close-button:hover,
+        html.dark .close-button:focus {
+            color: #f8fafc;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Theme Toggle Button (placed at the top right of the welcome page) -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 shadow-md transition-colors duration-300">
+        <!-- Sun icon for light mode, Moon icon for dark mode -->
+        <svg id="sun-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.472 7.472a.75.75 0 011.06 0L9.75 8.751A.75.75 0 018.75 9.75l-1.218-1.218a.75.75 0 010-1.06zM4.5 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H5.25A.75.75 0 014.5 12zM7.472 16.528a.75.75 0 010 1.06l-1.218 1.219a.75.75 0 01-1.06-1.06l1.218-1.218a.75.75 0 011.06 0zM12 17.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0v-2.25a.75.75 0 01.75-.75zM16.528 16.528a.75.75 0 011.06 0l1.218 1.219a.75.75 0 01-1.06 1.06l-1.219-1.218a.75.75 0 010-1.06zM19.5 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H20.25a.75.75 0 01-.75-.75zM16.528 7.472a.75.75 0 010-1.06l1.219-1.218a.75.75 0 011.06 1.06l-1.218 1.219a.75.75 0 01-1.06 0zM12 15a3 3 0 100-6 3 3 0 000 6z" />
+        </svg>
+        <svg id="moon-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.178 1.054l-1.637 2.127a.75.75 0 01-1.205-.882L8.293 2.15a.75.75 0 011.235-.432zM12 15a3 3 0 100-6 3 3 0 000 6zM21 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM18.913 18.913a.75.75 0 011.06-1.06l1.219 1.218a.75.75 0 01-1.06 1.06l-1.218-1.219zM12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.472 7.472a.75.75 0 011.06 0L9.75 8.751A.75.75 0 018.75 9.75l-1.218-1.218a.75.75 0 010-1.06zM4.5 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H5.25A.75.75 0 014.5 12zM7.472 16.528a.75.75 0 010 1.06l-1.218 1.219a.75.75 0 01-1.06-1.06l1.218-1.218a.75.75 0 011.06 0zM12 17.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0v-2.25a.75.75 0 01.75-.75zM16.528 16.528a.75.75 0 011.06 0l1.218 1.219a.75.75 0 01-1.06 1.06l-1.219-1.218a.75.75 0 010-1.06zM19.5 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H20.25a.75.75 0 01-.75-.75zM16.528 7.472a.75.75 0 010-1.06l1.219-1.218a.75.75 0 011.06 1.06l-1.218 1.219a.75.75 0 01-1.06 0zM12 15a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+        </svg>
+    </button>
 
     <div id="welcome-page" class="container mx-auto p-4 sm:p-6 md:p-8 flex-grow flex flex-col items-center justify-center text-center bg-gradient-to-br from-slate-50 to-blue-50 relative overflow-hidden">
         <h1 class="text-6xl md:text-8xl font-extrabold text-slate-900 mb-2 tracking-tighter h1-text-shadow">MBA</h1>
@@ -210,7 +410,8 @@
     <div id="dashboard-page" class="container mx-auto p-4 sm:p-6 md:p-8 flex-grow hidden">
         <header class="text-center mb-8 relative">
             <div class="sticky top-0 z-10 bg-slate-50 py-6 shadow-sm relative">
-                <div class="flex flex-col items-center"> <button onclick="goToWelcomeFromDashboard()" class="back-button mb-2">
+                <div class="flex flex-col items-center">
+                    <button onclick="goToWelcomeFromDashboard()" class="back-button mb-2">
                         &#8592; Back
                     </button>
                     <h1 class="text-3xl md:text-4xl font-bold text-slate-900">MBA Semester II Dashboard by Sahansa Jayawardhana</h1>
@@ -231,7 +432,20 @@
         <p>To know about the Creator, Visit: <a href="https://www.sahansa.uk/" target="_blank" class="text-blue-600 hover:underline">https://www.sahansa.uk/</a></p>
     </footer>
 
+    <!-- Custom Modal for "Coming Soon" -->
+    <div id="coming-soon-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2 class="text-xl font-bold mb-4">Coming Soon!</h2>
+            <p id="modal-message" class="text-lg"></p>
+            <button onclick="closeModal()" class="mt-6 px-6 py-2 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors duration-200">
+                OK
+            </button>
+        </div>
+    </div>
+
     <script>
+        // Define course data for different modules
         const courseData = {
             hr: {
                 id: 'hr',
@@ -417,8 +631,12 @@
             }
         };
 
-        const chartInstances = {};
+        const chartInstances = {}; // Object to store Chart.js instances
 
+        /**
+         * Creates and renders the course tabs based on the courseData.
+         * Clears existing tabs before rendering.
+         */
         function createTabs() {
             const tabsContainer = document.getElementById('course-tabs');
             tabsContainer.innerHTML = ''; // Clear existing tabs
@@ -426,69 +644,75 @@
                 const tab = document.createElement('button');
                 tab.textContent = course.title;
                 tab.dataset.courseId = course.id;
+                // Apply Tailwind classes for styling, including theme-aware colors
                 tab.className = `tab-button px-4 py-2 rounded-lg font-semibold transition-colors duration-300 tab-inactive`;
                 tab.onclick = () => showCourse(course.id);
                 tabsContainer.appendChild(tab);
             });
         }
 
+        /**
+         * Creates and renders the content sections for each course.
+         * Clears existing content sections before rendering.
+         */
         function createContentSections() {
             const contentContainer = document.getElementById('course-content');
             contentContainer.innerHTML = ''; // Clear existing content sections
             Object.values(courseData).forEach(course => {
                 const section = document.createElement('div');
                 section.id = `content-${course.id}`;
-                section.className = 'course-section hidden bg-white p-6 rounded-xl shadow-lg';
+                // Apply Tailwind classes for styling, including theme-aware colors
+                section.className = 'course-section hidden bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg dark:shadow-xl';
                 
                 section.innerHTML = `
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <div class="lg:col-span-1">
-                            <h2 class="text-2xl font-bold text-slate-900 mb-4">${course.title}</h2>
-                            <h3 class="text-lg font-semibold text-slate-700 mb-2">Course Aim</h3>
-                            <p class="text-slate-600 mb-6">${course.aim}</p>
-                            <h3 class="text-lg font-semibold text-slate-700 mb-4 text-center">Evaluation Breakdown</h3>
+                            <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-50 mb-4">${course.title}</h2>
+                            <h3 class="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-2">Course Aim</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-6">${course.aim}</p>
+                            <h3 class="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-4 text-center">Evaluation Breakdown</h3>
                             <div class="chart-container">
                                 <canvas id="chart-${course.id}"></canvas>
                             </div>
                         </div>
                         <div class="lg:col-span-1 flex flex-col">
-                            <h3 class="text-lg font-semibold text-slate-700 mb-4">Weekly Lecture Schedule <br> (1-15 Weeks)</h3>
-                            <button onclick="scrollToWeek15('${course.id}')" class="mb-4 px-4 py-2 bg-blue-100 text-blue-700 rounded-lg font-semibold hover:bg-blue-200 transition-colors duration-200 self-center">
+                            <h3 class="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-4">Weekly Lecture Schedule <br> (1-15 Weeks)</h3>
+                            <button onclick="scrollToWeek15('${course.id}')" class="mb-4 px-4 py-2 bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-200 rounded-lg font-semibold hover:bg-blue-200 dark:hover:bg-blue-700 transition-colors duration-200 self-center">
                                 Jump to Week 15
                             </button>
                             <div class="max-h-[300px] overflow-y-auto pr-2 space-y-3 mb-6 custom-scrollbar flex-grow">
                                 ${course.topics.map((topic, index) => `
-                                    <div id="week-${index + 1}-topic-${course.id}" class="flex items-start p-3 rounded-lg ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} border border-slate-200 ${index === 14 ? 'bg-blue-50 text-blue-800 font-bold' : ''}">
+                                    <div id="week-${index + 1}-topic-${course.id}" class="flex items-start p-3 rounded-lg ${index % 2 === 0 ? 'bg-slate-50 dark:bg-slate-800' : 'bg-white dark:bg-gray-900'} border border-slate-200 dark:border-slate-700 ${index === 14 ? 'bg-blue-50 text-blue-800 dark:bg-blue-800 dark:text-blue-200 font-bold' : ''}">
                                         <div class="flex-shrink-0 bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4">${index + 1}</div>
-                                        <p class="text-slate-700 self-center">${topic}</p>
+                                        <p class="text-slate-700 dark:text-slate-300 self-center">${topic}</p>
                                     </div>
                                 `).join('')}
                             </div>
                             
-                            <h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">Recommended Readings</h3>
+                            <h3 class="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-4 mt-4">Recommended Readings</h3>
                             <div class="max-h-[150px] overflow-y-auto pr-2 space-y-2 custom-scrollbar flex-grow">
                                 ${course.readings && course.readings.length > 0 ? 
                                     course.readings.map((reading, index) => `
-                                        <p class="text-slate-600 ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} p-2 rounded-lg border border-slate-200">
-                                            <a href="https://www.google.com/search?q=${encodeURIComponent(reading)}" target="_blank" class="text-blue-600 hover:underline">${reading}</a>
+                                        <p class="text-slate-600 dark:text-slate-400 ${index % 2 === 0 ? 'bg-slate-50 dark:bg-slate-800' : 'bg-white dark:bg-gray-900'} p-2 rounded-lg border border-slate-200 dark:border-slate-700">
+                                            <a href="https://www.google.com/search?q=${encodeURIComponent(reading)}" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">${reading}</a>
                                         </p>
-                                    `).join('') : '<p class="text-slate-600 p-2">N/A</p>'}
+                                    `).join('') : '<p class="text-slate-600 dark:text-slate-400 p-2">N/A</p>'}
                             </div>
 
-                            <h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">Access Recommended Readings Drive Files</h3>
-                            <p class="text-xs text-slate-500 mb-2">Dinesh Ayiya's Support in finding the resource books should be highlighted here.</p>
+                            <h3 class="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-4 mt-4">Access Recommended Readings Drive Files</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-2">Dinesh Ayiya's Support in finding the resource books should be highlighted here.</p>
                             <div class="max-h-[150px] overflow-y-auto pr-2 space-y-2 custom-scrollbar flex-grow">
                                 ${course.files && course.files.length > 0 ? 
                                     course.files.map((file, index) => `
-                                        <p class="text-slate-600 ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} p-2 rounded-lg border border-slate-200">
-                                            <a href="${file.url}" target="_blank" class="text-blue-600 hover:underline">📁 ${file.name}</a>
+                                        <p class="text-slate-600 dark:text-slate-400 ${index % 2 === 0 ? 'bg-slate-50 dark:bg-slate-800' : 'bg-white dark:bg-gray-900'} p-2 rounded-lg border border-slate-200 dark:border-slate-700">
+                                            <a href="${file.url}" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">📁 ${file.name}</a>
                                         </p>
-                                    `).join('') : '<p class="text-slate-600 p-2">No module files available.</p>'}
+                                    `).join('') : '<p class="text-slate-600 dark:text-slate-400 p-2">No module files available.</p>'}
                             </div>
 
-                            <h3 class="text-lg font-semibold text-slate-700 mb-2 mt-6">Add Your Findings Here</h3>
-                            <p class="text-sm text-slate-600 mb-4">Click & visit the drive folder and you can upload your resources.</p>
-                            <a href="https://drive.google.com/drive/folders/19Ba2q4EyBIgOYnxLlOy_iSpr6l8bWMD9?usp=drive_link" target="_blank" class="inline-block px-4 py-2 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition-colors duration-200 shadow-md self-start">
+                            <h3 class="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-2 mt-6">Add Your Findings Here</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Click & visit the drive folder and you can upload your resources.</p>
+                            <a href="https://drive.google.com/drive/folders/19Ba2q4EyBIgOYnxLlOy_iSpr6l8bWMD9?usp=drive_link" target="_blank" class="inline-block px-4 py-2 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition-colors duration-200 shadow-md self-start dark:bg-green-600 dark:hover:bg-green-700">
                                 Open Findings Drive Folder ↗
                             </a>
                         </div>
@@ -498,13 +722,36 @@
             });
         }
         
+        /**
+         * Updates the doughnut chart for a given course.
+         * Destroys existing chart instance before creating a new one.
+         * @param {string} courseId - The ID of the course.
+         */
         function updateChart(courseId) {
             const course = courseData[courseId];
             const ctx = document.getElementById(`chart-${courseId}`).getContext('2d');
             
             if (chartInstances[courseId]) {
-                chartInstances[courseId].destroy();
+                chartInstances[courseId].destroy(); // Destroy existing chart instance if it exists
             }
+
+            // Determine chart colors based on current theme
+            const isDarkMode = document.documentElement.classList.contains('dark');
+            const backgroundColors = isDarkMode ? [
+                '#60a5fa', /* blue-400 */
+                '#93c5fd', /* blue-300 */
+                '#bfdbfe', /* blue-200 */
+                '#dbeafe', /* blue-100 */
+                '#eff6ff', /* blue-50 */
+            ] : [
+                '#3b82f6', /* blue-500 */
+                '#60a5fa', /* blue-400 */
+                '#93c5fd', /* blue-300 */
+                '#bfdbfe', /* blue-200 */
+                '#dbeafe', /* blue-100 */
+            ];
+            const borderColor = isDarkMode ? '#1a202c' : '#ffffff'; // Border color for dark/light mode
+            const textColor = isDarkMode ? '#e2e8f0' : '#475569'; // Text color for dark/light mode
 
             chartInstances[courseId] = new Chart(ctx, {
                 type: 'doughnut',
@@ -513,14 +760,8 @@
                     datasets: [{
                         label: 'Evaluation %',
                         data: course.evaluation.map(item => item.value),
-                        backgroundColor: [
-                            '#3b82f6', /* blue-500 */
-                            '#60a5fa', /* blue-400 */
-                            '#93c5fd', /* blue-300 */
-                            '#bfdbfe', /* blue-200 */
-                            '#dbeafe', /* blue-100 */
-                        ],
-                        borderColor: '#ffffff',
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColor,
                         borderWidth: 3,
                         hoverOffset: 10
                     }]
@@ -535,7 +776,8 @@
                                 padding: 20,
                                 font: {
                                     size: 14,
-                                }
+                                },
+                                color: textColor // Apply dynamic text color to legend labels
                             }
                         },
                         tooltip: {
@@ -560,7 +802,10 @@
             });
         }
 
-        // Function to update the UI based on state
+        /**
+         * Updates the UI based on the current application state.
+         * @param {object} state - The current state object (e.g., { page: 'welcome' } or { page: 'dashboard', courseId: 'hr' }).
+         */
         function renderPage(state) {
             if (!state || state.page === 'welcome') {
                 document.getElementById('welcome-page').classList.remove('hidden');
@@ -579,34 +824,49 @@
             renderPage(event.state);
         };
 
-        // Function for the UI back button to go to welcome page
+        /**
+         * Navigates to the welcome page from the dashboard.
+         * Updates browser history.
+         */
         function goToWelcomeFromDashboard() {
             history.pushState({ page: 'welcome' }, '', '#welcome');
             renderPage({ page: 'welcome' });
         }
 
-        // Modified showWelcomePage for initial display and browser history
-        function showWelcomePage() {
-            if (history.state?.page !== 'welcome') {
+        /**
+         * Shows the welcome page.
+         * @param {boolean} pushHistory - Whether to push a new state to history (default: true).
+         */
+        function showWelcomePage(pushHistory = true) {
+            if (pushHistory && history.state?.page !== 'welcome') {
                 history.pushState({ page: 'welcome' }, '', '#welcome');
             }
             renderPage({ page: 'welcome' });
         }
 
-        // Modified showDashboard to push state
+        /**
+         * Shows the dashboard page, defaulting to 'hr' course.
+         * Updates browser history.
+         */
         function showDashboard() {
             history.pushState({ page: 'dashboard', courseId: 'hr' }, '', '#dashboard/hr');
             renderPage({ page: 'dashboard', courseId: 'hr' });
         }
 
-        // Modified showCourse to push state (controlled by parameter)
+        /**
+         * Displays the content for a specific course on the dashboard.
+         * @param {string} courseId - The ID of the course to display.
+         * @param {boolean} pushHistory - Whether to push a new state to history (default: true).
+         */
         function showCourse(courseId, pushHistory = true) {
-            // Update UI for the course
+            // Hide all course sections
             document.querySelectorAll('.course-section').forEach(section => {
                 section.classList.add('hidden');
             });
+            // Show the selected course section
             document.getElementById(`content-${courseId}`).classList.remove('hidden');
 
+            // Update active/inactive tab styles
             document.querySelectorAll('.tab-button').forEach(button => {
                 if (button.dataset.courseId === courseId) {
                     button.classList.remove('tab-inactive');
@@ -617,7 +877,7 @@
                 }
             });
 
-            updateChart(courseId);
+            updateChart(courseId); // Update the chart for the selected course
 
             // Push history state if explicitly requested (e.g., when clicking tabs)
             if (pushHistory) {
@@ -625,11 +885,26 @@
             }
         }
 
+        /**
+         * Displays a custom modal with a "Coming Soon" message.
+         * @param {string} semesterName - The name of the semester.
+         */
         function showComingSoon(semesterName) {
-            console.log(`${semesterName} content is coming soon!`);
-            alert(`${semesterName} content is coming soon!`);
+            document.getElementById('modal-message').textContent = `${semesterName} content is coming soon!`;
+            document.getElementById('coming-soon-modal').classList.remove('hidden');
         }
 
+        /**
+         * Closes the custom modal.
+         */
+        function closeModal() {
+            document.getElementById('coming-soon-modal').classList.add('hidden');
+        }
+
+        /**
+         * Scrolls to the Week 15 topic within the lecture schedule.
+         * @param {string} courseId - The ID of the current course.
+         */
         function scrollToWeek15(courseId) {
             const week15Element = document.getElementById(`week-15-topic-${courseId}`);
             if (week15Element) {
@@ -644,8 +919,70 @@
             }
         }
 
+        /**
+         * Updates the current date and time displayed in the header.
+         */
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            document.getElementById('current-datetime').textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        // --- Dark Mode Logic ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        /**
+         * Toggles the dark mode on or off.
+         */
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            updateThemeIcons();
+            // Re-render charts to update their colors
+            const currentPage = history.state;
+            if (currentPage && currentPage.page === 'dashboard' && currentPage.courseId) {
+                updateChart(currentPage.courseId);
+            }
+        }
+
+        /**
+         * Updates the visibility of the sun/moon icons based on the current theme.
+         */
+        function updateThemeIcons() {
+            if (document.documentElement.classList.contains('dark')) {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            } else {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            }
+        }
+
+        /**
+         * Applies the stored theme preference on page load.
+         */
+        function applyStoredTheme() {
+            const storedTheme = localStorage.getItem('theme');
+            if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+            updateThemeIcons();
+        }
+
         // Initial load logic: determine state from URL hash or default, and replace history
         window.onload = () => {
+            applyStoredTheme(); // Apply theme before rendering content
+            themeToggle.addEventListener('click', toggleTheme); // Attach event listener to theme toggle button
+
             const path = window.location.hash.substring(1); // Get path after #
             if (path.startsWith('dashboard/')) {
                 const courseId = path.split('/')[1] || 'hr';
@@ -656,14 +993,16 @@
                 renderPage({ page: 'welcome' });
             }
             updateDateTime();
-            setInterval(updateDateTime, 1000);
+            setInterval(updateDateTime, 1000); // Update date and time every second
         };
 
-        function updateDateTime() {
-            const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-            document.getElementById('current-datetime').textContent = now.toLocaleDateString('en-US', options);
-        }
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            const modal = document.getElementById('coming-soon-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
