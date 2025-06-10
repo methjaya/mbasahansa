@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -266,6 +264,9 @@
                 ],
                 files: [
                     { name: "HR Module Files", url: "https://drive.google.com/file/d/1egsTxCkBz70cLx5X54uyTgrqVPJT9YGX/view?usp=drive_link" }
+                ],
+                studyNotes: [
+                    { name: "HRM Study Note", url: "https://docs.google.com/document/d/1OKgVX_QsCE4ayiqiJbzAirVLeJH9EO4e-9dIv1tMnIk/edit?usp=sharing" }
                 ]
             },
             op: {
@@ -307,6 +308,9 @@
                     { name: "Operations Module File 1", url: "https://drive.google.com/file/d/10eQCNnIKYJx6_euEfOKi9BzJcU51U2Uz/view?usp=drive_link" },
                     { name: "Operations Module File 2", url: "https://drive.google.com/file/d/15xurqKCGm7G75KdOqU-jfpGUMnyyNJ0C/view?usp=drive_link" },
                     { name: "Operations Module File 3", url: "https://drive.google.com/file/d/1JYlLcA4uhvE6b86RIPgmJRQ2Wmrlb1UY/view?usp=sharing" }
+                ],
+                studyNotes: [
+                    { name: "Operations Management Study Note", url: "https://docs.google.com/document/d/1TCN4dS218lSio07QuGVkQ8_k_D4OMf5M1SkONnNtkTc/edit?usp=sharing" }
                 ]
             },
             research: {
@@ -343,6 +347,9 @@
                 files: [
                     { name: "Research Project File 1", url: "https://drive.google.com/file/d/1zBQHbB_d_LXrtukzi2vkey42lNVzMTEe/view?usp=drive_link" },
                     { name: "Research Project File 2", url: "https://drive.google.com/file/d/1qQ3AfjULLJCMcX64vH6_oA-qe3hCoWjh/view?usp=drive_link" }
+                ],
+                studyNotes: [
+                    { name: "Research Project Study Note", url: "https://docs.google.com/document/d/1pjB5VOLDIItnqqqvNT0VG90tijVZNcUVApco6pyk0ZY/edit?usp=sharing" }
                 ]
             },
             ob: {
@@ -383,6 +390,9 @@
                     { name: "OB Module File 1", url: "https://drive.google.com/file/d/1K4GJZsWpb9ZTCnOHXK7Katrmwy95JBE4/view?usp=drive_link" },
                     { name: "OB Module File 2", url: "https://drive.google.com/file/d/16PJMP5FoBwZQt51qx-7Cf9yxgEosk3jD/view?usp=drive_link" },
                     { name: "OB Module File 3", url: "https://drive.google.com/file/d/1a_d5i2YR8QfpMxGiIBVOsUN2Y_ZjLKBU/view?usp=drive_link" }
+                ],
+                studyNotes: [
+                    { name: "OB Study Note", url: "https://docs.google.com/document/d/1hwj8hL1GKmy2Sqn1LGaS805XsWEREuU44oXG9S8nd9I/edit?usp=sharing" }
                 ]
             },
             marketing: {
@@ -415,6 +425,9 @@
                 files: [
                     { name: "Marketing Module File 1", url: "https://drive.google.com/file/d/1egsTxCkBz70cLx5X54uyTgrqVPJT9YGX/view?usp=drive_link" },
                     { name: "Marketing Module File 2", url: "https://drive.google.com/file/d/1X-N4aLSQ8Xx1FJB3eMesW-nSQutKDOS7/view?usp=drive_link" }
+                ],
+                studyNotes: [
+                    { name: "Marketing Study Note", url: "https://docs.google.com/document/d/12HsM8P86WfVfRR7I9prbuxbLyNJ4E_grELqMnRHdz-I/edit?usp=sharing" }
                 ]
             }
         };
@@ -486,6 +499,16 @@
                                             <a href="${file.url}" target="_blank" class="text-blue-600 hover:underline">📁 ${file.name}</a>
                                         </p>
                                     `).join('') : '<p class="text-slate-600 p-2">No module files available.</p>'}
+                            </div>
+
+                            <h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">STUDY NOTE CREATED BY SAHANSA.</h3>
+                            <div class="max-h-[150px] overflow-y-auto pr-2 space-y-2 custom-scrollbar flex-grow">
+                                ${course.studyNotes && course.studyNotes.length > 0 ? 
+                                    course.studyNotes.map((note, index) => `
+                                        <p class="text-slate-600 ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} p-2 rounded-lg border border-slate-200">
+                                            <a href="${note.url}" target="_blank" class="text-blue-600 hover:underline">📝 ${note.name}</a>
+                                        </p>
+                                    `).join('') : '<p class="text-slate-600 p-2">No study notes available.</p>'}
                             </div>
 
                             <h3 class="text-lg font-semibold text-slate-700 mb-2 mt-6">Add Your Findings Here</h3>
@@ -627,8 +650,28 @@
         }
 
         function showComingSoon(semesterName) {
-            console.log(`${semesterName} content is coming soon!`);
-            alert(`${semesterName} content is coming soon!`);
+            // Using a custom modal/message box instead of alert()
+            const messageBox = document.createElement('div');
+            messageBox.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                text-align: center;
+                font-family: 'Inter', sans-serif;
+            `;
+            messageBox.innerHTML = `
+                <p class="text-lg font-semibold mb-4">${semesterName} content is coming soon!</p>
+                <button onclick="this.parentNode.remove()" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200">
+                    OK
+                </button>
+            `;
+            document.body.appendChild(messageBox);
         }
 
         function scrollToWeek15(courseId) {
