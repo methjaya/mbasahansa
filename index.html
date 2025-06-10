@@ -28,45 +28,45 @@
             background-color: #e5e7eb; /* gray-200 */
             color: #374151; /* gray-700 */
         }
-        /* Custom scrollbar styling for Webkit browsers */
+    
         .custom-scrollbar::-webkit-scrollbar {
-            width: 8px; /* width of the scrollbar */
+            width: 8px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1; /* color of the scrollbar track */
+            background: #f1f1f1; 
             border-radius: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #888; /* color of the scrollbar handle */
+            background: #888;
             border-radius: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #555; /* color of the scrollbar handle on hover */
+            background: #555; 
         }
         .semester-tile {
             @apply flex flex-col items-center justify-center p-4 rounded-xl shadow-md transition-all duration-300 ease-in-out;
             cursor: pointer;
-            min-height: 100px; /* Adjusted height for responsiveness */
+            min-height: 100px; 
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
-            border-radius: 1rem; /* More rounded */
-            text-align: center; /* Ensure internal text is centered */
-            padding: 1.5rem; /* Increased padding for more space */
+            border-radius: 1rem;
+            text-align: center; 
+            padding: 1.5rem; 
         }
 
-        /* Responsive adjustments for semester tiles - Reverted to original flexible sizing */
-        @media (min-width: 640px) { /* Small screens and up */
+
+        @media (min-width: 640px) { 
             .semester-tile {
                 min-height: 120px;
                 padding: 1.5rem;
             }
         }
-        @media (min-width: 768px) { /* Medium screens and up */
+        @media (min-width: 768px) { 
             .semester-tile {
                 min-height: 140px;
                 padding: 1.75rem;
             }
         }
-        @media (min-width: 1024px) { /* Large screens and up */
+        @media (min-width: 1024px) { 
             .semester-tile {
                 min-height: 160px;
                 padding: 2rem;
@@ -78,17 +78,17 @@
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .semester-tile .text-3xl {
-            font-size: 1.875rem; /* Reverted to original font size for titles */
+            font-size: 1.875rem; 
             line-height: 2.25rem;
         }
         .semester-tile .text-sm {
-            font-size: 0.875rem; /* Reverted to original font size for descriptions */
+            font-size: 0.875rem; 
             line-height: 1.25rem;
-            opacity: 0.9; /* Make it slightly more visible */
-            display: block; /* Ensure it takes its own line */
-            margin-top: 0.5rem; /* Explicit margin to separate from title */
+            opacity: 0.9; 
+            display: block; 
+            margin-top: 0.5rem; 
         }
-        /* Specific colors for each semester tile */
+        
         #semester-1-tile {
             background-color: #F97316; /* orange-500 */
             color: white;
@@ -120,7 +120,7 @@
             background-color: #FBCFE8; /* pink-300 */
             color: #831843; /* pink-900 */
         }
-        /* Styling for the MBA title text shadow */
+        
         .h1-text-shadow {
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
@@ -133,8 +133,8 @@
             font-weight: 600;
             transition: background-color 0.2s, transform 0.2s, color 0.2s; /* Added color transition */
             box-shadow: none; /* Removed box shadow */
-            font-size: 1.25rem; /* Slightly smaller for text, or keep 1.5rem for arrow dominant */
-            padding: 0.25rem 0.75rem; /* Add some padding back for hover area */
+            font-size: 1.25rem; 
+            padding: 0.25rem 0.75rem;
             display: inline-flex; /* To align arrow and text */
             gap: 0.5rem; /* Space between arrow and text */
             align-items: center;
@@ -619,7 +619,6 @@
 
             updateChart(courseId);
 
-            // Push history state if explicitly requested (e.g., when clicking tabs)
             if (pushHistory) {
                 history.pushState({ page: 'dashboard', courseId: courseId }, '', `#dashboard/${courseId}`);
             }
@@ -644,7 +643,7 @@
             }
         }
 
-        // Initial load logic: determine state from URL hash or default, and replace history
+
         window.onload = () => {
             const path = window.location.hash.substring(1); // Get path after #
             if (path.startsWith('dashboard/')) {
