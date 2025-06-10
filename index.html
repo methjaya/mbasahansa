@@ -167,7 +167,7 @@
 
     <div id="welcome-page" class="container mx-auto p-4 sm:p-6 md:p-8 flex-grow flex flex-col items-center justify-center text-center bg-gradient-to-br from-slate-50 to-blue-50 relative overflow-hidden">
         <h1 class="text-6xl md:text-8xl font-extrabold text-slate-900 mb-2 tracking-tighter h1-text-shadow">MBA</h1>
-        <p class="text-lg text-slate-600 mb-8">Dashboards by Sahansa Jayawardhana</p>
+        <p class="text-lg text-slate-600 mb-8">Dashboards by <a href="https://www.instagram.com/seasonsixty?igsh=MWhiZGw2djF0Z3p3cA%3D%3D&utm_source=qr" target="_blank" class="text-blue-600 hover:underline">Sahansa Jayawardhana</a></p>
         
         <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-8 rounded-lg shadow-md max-w-xl w-full">
             <p class="text-lg font-semibold">Select a Semester to begin your learning journey.</p>
@@ -191,6 +191,15 @@
                 <span class="text-sm">Coming Soon!</span>
             </div>
         </div>
+        
+        <!-- New section for Study Notes -->
+        <div class="mt-12 w-full max-w-4xl text-center">
+            <div id="study-notes-tile" class="semester-tile active bg-green-500 text-white" onclick="showAllStudyNotes()">
+                <span class="text-3xl font-bold">All Study Notes</span>
+                <span class="text-sm flex items-center justify-center">View all study notes by <a href="https://www.instagram.com/seasonsixty?igsh=MWhiZGw2djF0Z3p3cA%3D%3D&utm_source=qr" target="_blank" class="text-white hover:underline">Sahansa</a> <span class="ml-2">&#8594;</span></span>
+            </div>
+        </div>
+        <!-- End new section -->
 
         <div class="absolute top-1/4 left-[10%] transform -translate-x-1/2 -translate-y-1/2 animate-float hidden md:block opacity-10" style="animation-duration: 4s;">
             <svg class="w-28 h-28 text-blue-300" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -213,7 +222,7 @@
                 <div class="flex flex-col items-center"> <button onclick="goToWelcomeFromDashboard()" class="back-button mb-2">
                         &#8592; Back
                     </button>
-                    <h1 class="text-3xl md:text-4xl font-bold text-slate-900">MBA Semester II Dashboard by Sahansa Jayawardhana</h1>
+                    <h1 class="text-3xl md:text-4xl font-bold text-slate-900">MBA Semester II Dashboard by <a href="https://www.instagram.com/seasonsixty?igsh=MWhiZGw2djF0Z3p3cA%3D%3D&utm_source=qr" target="_blank" class="text-blue-600 hover:underline">Sahansa Jayawardhana</a></h1>
                 </div>
             </div>
             <p class="mt-2 text-lg text-slate-600">I just created this for fun.<br> Happy Learning, Everyone :)</p>
@@ -228,7 +237,7 @@
     </div>
 
     <footer class="mt-auto py-4 text-center text-slate-600 text-sm bg-slate-100">
-        <p>To know about the Creator, Visit: <a href="https://www.sahansa.uk/" target="_blank" class="text-blue-600 hover:underline">https://www.sahansa.uk/</a></p>
+        <p>To know about the Creator, Visit: <a href="https://www.sahansa.uk/" target="_blank" class="text-blue-600 hover:underline">https://www.sahansa.uk/</a> <br> Instagram : <a href="https://www.instagram.com/seasonsixty?igsh=MWhiZGw2djF0Z3p3cA%3D%3D&utm_source=qr" target="_blank" class="text-blue-600 hover:underline">https://www.instagram.com/seasonsixty?igsh=MWhiZGw2djF0Z3p3cA%3D%3D&utm_source=qr</a></p>
     </footer>
 
     <script>
@@ -429,6 +438,23 @@
                 studyNotes: [
                     { name: "Marketing Study Note", url: "https://docs.google.com/document/d/12HsM8P86WfVfRR7I9prbuxbLyNJ4E_grELqMnRHdz-I/edit?usp=sharing" }
                 ]
+            },
+            // A new course entry to aggregate all study notes for a dedicated view
+            all_study_notes: {
+                id: 'all_study_notes',
+                title: 'All Study Notes by Sahansa',
+                aim: 'A compilation of all study notes available across different modules.',
+                evaluation: [], // Not applicable for this aggregate view
+                topics: [], // Not applicable
+                readings: [], // Not applicable
+                files: [], // Not applicable
+                studyNotes: [
+                    { name: "HRM Study Note", url: "https://docs.google.com/document/d/1OKgVX_QsCE4ayiqiJbzAirVLeJH9EO4e-9dIv1tMnIk/edit?usp=sharing" },
+                    { name: "OB Study Note", url: "https://docs.google.com/document/d/1hwj8hL1GKmy2Sqn1LGaS805XsWEREuU44oXG9S8nd9I/edit?usp=sharing" },
+                    { name: "Marketing Study Note", url: "https://docs.google.com/document/d/12HsM8P86WfVfRR7I9prbuxbLyNJ4E_grELqMnRHdz-I/edit?usp=sharing" },
+                    { name: "Operations Management Study Note", url: "https://docs.google.com/document/d/1TCN4dS218lSio07QuGVkQ8_k_D4OMf5M1SkONnNtkTc/edit?usp=sharing" },
+                    { name: "Research Project Study Note", url: "https://docs.google.com/document/d/1pjB5VOLDIItnqqqvNT0VG90tijVZNcUVApco6pyk0ZY/edit?usp=sharing" }
+                ]
             }
         };
 
@@ -438,12 +464,15 @@
             const tabsContainer = document.getElementById('course-tabs');
             tabsContainer.innerHTML = ''; // Clear existing tabs
             Object.values(courseData).forEach(course => {
-                const tab = document.createElement('button');
-                tab.textContent = course.title;
-                tab.dataset.courseId = course.id;
-                tab.className = `tab-button px-4 py-2 rounded-lg font-semibold transition-colors duration-300 tab-inactive`;
-                tab.onclick = () => showCourse(course.id);
-                tabsContainer.appendChild(tab);
+                // Exclude 'all_study_notes' from regular course tabs if desired
+                if (course.id !== 'all_study_notes') {
+                    const tab = document.createElement('button');
+                    tab.textContent = course.title;
+                    tab.dataset.courseId = course.id;
+                    tab.className = `tab-button px-4 py-2 rounded-lg font-semibold transition-colors duration-300 tab-inactive`;
+                    tab.onclick = () => showCourse(course.id);
+                    tabsContainer.appendChild(tab);
+                }
             });
         }
 
@@ -455,134 +484,190 @@
                 section.id = `content-${course.id}`;
                 section.className = 'course-section hidden bg-white p-6 rounded-xl shadow-lg';
                 
-                section.innerHTML = `
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <div class="lg:col-span-1">
-                            <h2 class="text-2xl font-bold text-slate-900 mb-4">${course.title}</h2>
-                            <h3 class="text-lg font-semibold text-slate-700 mb-2">Course Aim</h3>
-                            <p class="text-slate-600 mb-6">${course.aim}</p>
-                            <h3 class="text-lg font-semibold text-slate-700 mb-4 text-center">Evaluation Breakdown</h3>
-                            <div class="chart-container">
-                                <canvas id="chart-${course.id}"></canvas>
-                            </div>
+                let evaluationHtml = '';
+                if (course.evaluation && course.evaluation.length > 0) {
+                    evaluationHtml = `
+                        <h3 class="text-lg font-semibold text-slate-700 mb-4 text-center">Evaluation Breakdown</h3>
+                        <div class="chart-container">
+                            <canvas id="chart-${course.id}"></canvas>
                         </div>
-                        <div class="lg:col-span-1 flex flex-col">
-                            <h3 class="text-lg font-semibold text-slate-700 mb-4">Weekly Lecture Schedule <br> (1-15 Weeks)</h3>
-                            <button onclick="scrollToWeek15('${course.id}')" class="mb-4 px-4 py-2 bg-blue-100 text-blue-700 rounded-lg font-semibold hover:bg-blue-200 transition-colors duration-200 self-center">
-                                Jump to Week 15
-                            </button>
-                            <div class="max-h-[300px] overflow-y-auto pr-2 space-y-3 mb-6 custom-scrollbar flex-grow">
-                                ${course.topics.map((topic, index) => `
-                                    <div id="week-${index + 1}-topic-${course.id}" class="flex items-start p-3 rounded-lg ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} border border-slate-200 ${index === 14 ? 'bg-blue-50 text-blue-800 font-bold' : ''}">
-                                        <div class="flex-shrink-0 bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4">${index + 1}</div>
-                                        <p class="text-slate-700 self-center">${topic}</p>
-                                    </div>
-                                `).join('')}
-                            </div>
-                            
-                            <h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">Recommended Readings</h3>
-                            <div class="max-h-[150px] overflow-y-auto pr-2 space-y-2 custom-scrollbar flex-grow">
-                                ${course.readings && course.readings.length > 0 ? 
-                                    course.readings.map((reading, index) => `
-                                        <p class="text-slate-600 ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} p-2 rounded-lg border border-slate-200">
-                                            <a href="https://www.google.com/search?q=${encodeURIComponent(reading)}" target="_blank" class="text-blue-600 hover:underline">${reading}</a>
-                                        </p>
-                                    `).join('') : '<p class="text-slate-600 p-2">N/A</p>'}
-                            </div>
+                    `;
+                }
 
-                            <h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">Access Recommended Readings Drive Files</h3>
-                            <p class="text-xs text-slate-500 mb-2">Support in Finding Resources – Dinesh Ayiya.</p>
-                            <div class="max-h-[150px] overflow-y-auto pr-2 space-y-2 custom-scrollbar flex-grow">
-                                ${course.files && course.files.length > 0 ? 
-                                    course.files.map((file, index) => `
-                                        <p class="text-slate-600 ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} p-2 rounded-lg border border-slate-200">
-                                            <a href="${file.url}" target="_blank" class="text-blue-600 hover:underline">📁 ${file.name}</a>
-                                        </p>
-                                    `).join('') : '<p class="text-slate-600 p-2">No module files available.</p>'}
-                            </div>
-
-                            <h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">STUDY NOTE CREATED BY SAHANSA.</h3>
-                            <div class="max-h-[150px] overflow-y-auto pr-2 space-y-2 custom-scrollbar flex-grow">
-                                ${course.studyNotes && course.studyNotes.length > 0 ? 
-                                    course.studyNotes.map((note, index) => `
-                                        <p class="text-slate-600 ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} p-2 rounded-lg border border-slate-200">
-                                            <a href="${note.url}" target="_blank" class="text-blue-600 hover:underline">📝 ${note.name}</a>
-                                        </p>
-                                    `).join('') : '<p class="text-slate-600 p-2">No study notes available.</p>'}
-                            </div>
-
-                            <h3 class="text-lg font-semibold text-slate-700 mb-2 mt-6">Add Your Findings Here</h3>
-                            <p class="text-sm text-slate-600 mb-4">Click & visit the drive folder and you can upload your resources.</p>
-                            <a href="https://drive.google.com/drive/folders/19Ba2q4EyBIgOYnxLlOy_iSpr6l8bWMD9?usp=drive_link" target="_blank" class="inline-block px-4 py-2 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition-colors duration-200 shadow-md self-start">
-                                Open Findings Drive Folder ↗
-                            </a>
+                let topicsHtml = '';
+                if (course.topics && course.topics.length > 0) {
+                    topicsHtml = `
+                        <h3 class="text-lg font-semibold text-slate-700 mb-4">Weekly Lecture Schedule <br> (1-15 Weeks)</h3>
+                        <button onclick="scrollToWeek15('${course.id}')" class="mb-4 px-4 py-2 bg-blue-100 text-blue-700 rounded-lg font-semibold hover:bg-blue-200 transition-colors duration-200 self-center">
+                            Jump to Week 15
+                        </button>
+                        <div class="max-h-[300px] overflow-y-auto pr-2 space-y-3 mb-6 custom-scrollbar flex-grow">
+                            ${course.topics.map((topic, index) => `
+                                <div id="week-${index + 1}-topic-${course.id}" class="flex items-start p-3 rounded-lg ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} border border-slate-200 ${index === 14 ? 'bg-blue-50 text-blue-800 font-bold' : ''}">
+                                    <div class="flex-shrink-0 bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4">${index + 1}</div>
+                                    <p class="text-slate-700 self-center">${topic}</p>
+                                </div>
+                            `).join('')}
                         </div>
-                    </div>
+                    `;
+                }
+
+                let readingsHtml = '';
+                if (course.readings && course.readings.length > 0) {
+                    readingsHtml = `
+                        <h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">Recommended Readings</h3>
+                        <div class="max-h-[150px] overflow-y-auto pr-2 space-y-2 custom-scrollbar flex-grow">
+                            ${course.readings.map((reading, index) => `
+                                <p class="text-slate-600 ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} p-2 rounded-lg border border-slate-200">
+                                    <a href="https://www.google.com/search?q=${encodeURIComponent(reading)}" target="_blank" class="text-blue-600 hover:underline">${reading}</a>
+                                </p>
+                            `).join('')}
+                        </div>
+                    `;
+                } else if (course.id !== 'all_study_notes') { // Only show N/A if it's a regular module and no readings
+                    readingsHtml = `<h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">Recommended Readings</h3><p class="text-slate-600 p-2">N/A</p>`;
+                }
+
+                let filesHtml = '';
+                if (course.files && course.files.length > 0) {
+                    filesHtml = `
+                        <h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">Access Recommended Readings Drive Files</h3>
+                        <p class="text-xs text-slate-500 mb-2">Support in Finding Resources – Dinesh Ayiya.</p>
+                        <div class="max-h-[150px] overflow-y-auto pr-2 space-y-2 custom-scrollbar flex-grow">
+                            ${course.files.map((file, index) => `
+                                <p class="text-slate-600 ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} p-2 rounded-lg border border-slate-200">
+                                    <a href="${file.url}" target="_blank" class="text-blue-600 hover:underline">📁 ${file.name}</a>
+                                </p>
+                            `).join('')}
+                        </div>
+                    `;
+                } else if (course.id !== 'all_study_notes') { // Only show 'No module files' if it's a regular module and no files
+                    filesHtml = `<h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">Access Recommended Readings Drive Files</h3><p class="text-slate-600 p-2">No module files available.</p>`;
+                }
+
+                let studyNotesHtml = '';
+                if (course.studyNotes && course.studyNotes.length > 0) {
+                    studyNotesHtml = `
+                        <h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">STUDY NOTE CREATED BY SAHANSA.</h3>
+                        <div class="max-h-[150px] overflow-y-auto pr-2 space-y-2 custom-scrollbar flex-grow">
+                            ${course.studyNotes.map((note, index) => `
+                                <p class="text-slate-600 ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} p-2 rounded-lg border border-slate-200">
+                                    <a href="${note.url}" target="_blank" class="text-blue-600 hover:underline">📝 ${note.name}</a>
+                                </p>
+                            `).join('')}
+                        </div>
+                    `;
+                } else if (course.id !== 'all_study_notes') { // Only show 'No study notes' if it's a regular module and no notes
+                    studyNotesHtml = `<h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">STUDY NOTE CREATED BY SAHANSA.</h3><p class="text-slate-600 p-2">No study notes available.</p>`;
+                }
+
+                let findingsHtml = `
+                    <h3 class="text-lg font-semibold text-slate-700 mb-2 mt-6">Add Your Findings Here</h3>
+                    <p class="text-sm text-slate-600 mb-4">Click & visit the drive folder and you can upload your resources.</p>
+                    <a href="https://drive.google.com/drive/folders/19Ba2q4EyBIgOYnxLlOy_iSpr6l8bWMD9?usp=drive_link" target="_blank" class="inline-block px-4 py-2 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition-colors duration-200 shadow-md self-start">
+                        Open Findings Drive Folder ↗
+                    </a>
                 `;
+
+                // Adjust content for the 'all_study_notes' section
+                if (course.id === 'all_study_notes') {
+                    section.innerHTML = `
+                        <div class="grid grid-cols-1 gap-8">
+                            <div class="col-span-1">
+                                <h2 class="text-2xl font-bold text-slate-900 mb-4">${course.title}</h2>
+                                <p class="text-slate-600 mb-6">${course.aim}</p>
+                                ${studyNotesHtml}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    section.innerHTML = `
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <div class="lg:col-span-1">
+                                <h2 class="text-2xl font-bold text-slate-900 mb-4">${course.title}</h2>
+                                <h3 class="text-lg font-semibold text-slate-700 mb-2">Course Aim</h3>
+                                <p class="text-slate-600 mb-6">${course.aim}</p>
+                                ${evaluationHtml}
+                            </div>
+                            <div class="lg:col-span-1 flex flex-col">
+                                ${topicsHtml}
+                                ${readingsHtml}
+                                ${filesHtml}
+                                ${studyNotesHtml}
+                                ${findingsHtml}
+                            </div>
+                        </div>
+                    `;
+                }
                 contentContainer.appendChild(section);
             });
         }
         
         function updateChart(courseId) {
-            const course = courseData[courseId];
-            const ctx = document.getElementById(`chart-${courseId}`).getContext('2d');
-            
-            if (chartInstances[courseId]) {
-                chartInstances[courseId].destroy();
-            }
+            // Only attempt to draw chart if it's a regular course and has evaluation data
+            if (courseId !== 'all_study_notes') {
+                const course = courseData[courseId];
+                const ctx = document.getElementById(`chart-${courseId}`).getContext('2d');
+                
+                if (chartInstances[courseId]) {
+                    chartInstances[courseId].destroy();
+                }
 
-            chartInstances[courseId] = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: course.evaluation.map(item => item.label),
-                    datasets: [{
-                        label: 'Evaluation %',
-                        data: course.evaluation.map(item => item.value),
-                        backgroundColor: [
-                            '#3b82f6', /* blue-500 */
-                            '#60a5fa', /* blue-400 */
-                            '#93c5fd', /* blue-300 */
-                            '#bfdbfe', /* blue-200 */
-                            '#dbeafe', /* blue-100 */
-                        ],
-                        borderColor: '#ffffff',
-                        borderWidth: 3,
-                        hoverOffset: 10
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                padding: 20,
-                                font: {
-                                    size: 14,
-                                }
-                            }
+                if (course.evaluation && course.evaluation.length > 0) {
+                    chartInstances[courseId] = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: course.evaluation.map(item => item.label),
+                            datasets: [{
+                                label: 'Evaluation %',
+                                data: course.evaluation.map(item => item.value),
+                                backgroundColor: [
+                                    '#3b82f6', /* blue-500 */
+                                    '#60a5fa', /* blue-400 */
+                                    '#93c5fd', /* blue-300 */
+                                    '#bfdbfe', /* blue-200 */
+                                    '#dbeafe', /* blue-100 */
+                                ],
+                                borderColor: '#ffffff',
+                                borderWidth: 3,
+                                hoverOffset: 10
+                            }]
                         },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.label || '';
-                                    if (label) {
-                                        label += ': ';
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                    labels: {
+                                        padding: 20,
+                                        font: {
+                                            size: 14,
+                                        }
                                     }
-                                    if (context.parsed !== null) {
-                                        label += context.parsed + '%';
-                                    }
-                                    return label;
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            let label = context.label || '';
+                                            if (label) {
+                                                label += ': ';
+                                            }
+                                            if (context.parsed !== null) {
+                                                label += context.parsed + '%';
+                                            }
+                                            return label;
+                                        }
+                                    },
+                                    bodyFont: { size: 14 },
+                                    titleFont: { size: 16 }
                                 }
                             },
-                            bodyFont: { size: 14 },
-                            titleFont: { size: 16 }
+                            cutout: '60%'
                         }
-                    },
-                    cutout: '60%'
+                    });
                 }
-            });
+            }
         }
 
         // Function to update the UI based on state
@@ -622,6 +707,17 @@
         function showDashboard() {
             history.pushState({ page: 'dashboard', courseId: 'hr' }, '', '#dashboard/hr');
             renderPage({ page: 'dashboard', courseId: 'hr' });
+        }
+
+        // Function to show all study notes
+        function showAllStudyNotes() {
+            history.pushState({ page: 'dashboard', courseId: 'all_study_notes' }, '', '#dashboard/all_study_notes');
+            renderPage({ page: 'dashboard', courseId: 'all_study_notes' });
+            // Deactivate regular course tabs
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('tab-active');
+                button.classList.add('tab-inactive');
+            });
         }
 
         // Modified showCourse to push state (controlled by parameter)
