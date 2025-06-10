@@ -443,7 +443,7 @@
             all_study_notes: {
                 id: 'all_study_notes',
                 title: 'All Study Notes by Sahansa',
-            
+                aim: 'All study notes available across different modules.', // Updated text
                 evaluation: [], // Not applicable for this aggregate view
                 topics: [], // Not applicable
                 readings: [], // Not applicable
@@ -547,9 +547,14 @@
 
                 let studyNotesHtml = '';
                 if (course.studyNotes && course.studyNotes.length > 0) {
+                    // Conditional styling for study notes section based on course ID
+                    const studyNotesContainerClasses = course.id === 'all_study_notes' 
+                        ? 'space-y-2' // No max-h and overflow-y-auto for all_study_notes
+                        : 'max-h-[150px] overflow-y-auto pr-2 space-y-2 custom-scrollbar flex-grow';
+
                     studyNotesHtml = `
                         <h3 class="text-lg font-semibold text-slate-700 mb-4 mt-4">STUDY NOTE CREATED BY SAHANSA.</h3>
-                        <div class="max-h-[150px] overflow-y-auto pr-2 space-y-2 custom-scrollbar flex-grow">
+                        <div class="${studyNotesContainerClasses}">
                             ${course.studyNotes.map((note, index) => `
                                 <p class="text-slate-600 ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'} p-2 rounded-lg border border-slate-200">
                                     <a href="${note.url}" target="_blank" class="text-blue-600 hover:underline">📝 ${note.name}</a>
